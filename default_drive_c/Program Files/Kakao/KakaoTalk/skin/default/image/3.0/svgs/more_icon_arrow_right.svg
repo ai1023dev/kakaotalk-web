@@ -1,0 +1,1 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="11" height="11"><defs><filter id="a"><feColorMatrix in="SourceGraphic" values="0 0 0 0 0.600000 0 0 0 0 0.600000 0 0 0 0 0.600000 0 0 0 1.000000 0"/></filter></defs><g fill="none" fill-rule="evenodd" stroke-linejoin="round" filter="url(#a)"><path stroke="#000" stroke-width="1.2" d="m5 1 4.5 4.5L5 10"/></g></svg>

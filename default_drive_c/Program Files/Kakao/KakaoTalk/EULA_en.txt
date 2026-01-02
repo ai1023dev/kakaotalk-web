@@ -1,0 +1,124 @@
+﻿The KakaoTalk PC version software end-user license agreement (hereinafter, the ""Agreement"") is hereby established to regulate the use of all software and services (hereinafter, the ""Product"") provided by Kakao Corporation (hereinafter, the ""Company"") to users (hereinafter, the ""User"") utilizing this service. This Agreement includes provisions governing the rights, obligations, responsibilities, and other necessary matters between the Company and the User.
+
+The Products covered by this Agreement refer to the KakaoTalk PC version provided on the Kakao Corporate website (https://www.kakaocorp.com) and may encompass computer software as well as accompanying materials, media, files, data, printed materials, and electronic documents, among other items. 
+
+The User shall be deemed to have accepted the terms of this Agreement and to be using the Product, whether in whole or in part, by installing, copying, or running it on a computer or network. If you disagree with this Agreement, please refrain from clicking the Cancel / Close (X) button or installing the software. Installing and updating the software signifies that the User has read, comprehended, and consented to the terms and conditions hereof.
+
+1. User Permission
+
+1.1. The User who agrees to this Agreement is granted permission to utilize the KakaoTalk PC version for unrestricted communication with other KakaoTalk users, irrespective of individual user affiliations, including businesses, non-profit organizations, public institutions, educational institutions, and PC cafes, without any limitations based on usage environments.
+
+1.2. The KakaoTalk PC version is accessible to users using the mobile KakaoTalk service with their registered phone number, and it is subject to the terms and operational policies agreed upon with the Company during account creation. However, in case of any inconsistency between those relevant terms and operational policies and this Agreement, the provisions of this Agreement shall prevail.
+
+Kakao Operational Policy:
+<https://www.kakao.com/policy/oppolicy?lang=en>
+
+1.3. Installing the Product in a desktop virtualized environment or on a network server for use on multiple computers does not guarantee normal operation.
+
+2. Copyright and Usage Restrictions
+
+2.1. Unless otherwise indicated by the Company, all copyrights and intellectual property rights pertaining to the Product and all accompanying materials, printed materials, and software contained within the Product shall be the exclusive property of the Company. The relevant rights shall be protected under the copyright laws of the Republic of Korea and international copyright treaties.
+
+2.2. The User shall adhere to the Republic of Korea's copyright laws, international copyright treaties, and other applicable legal provisions concerning the use of the Product. Except as explicitly permitted within the limits specified by relevant regulations, the User shall not engage in activities such as reverse engineering, decompilation, or disassembly of the Product. Furthermore, the User shall not copy, modify, or adapt the Product or any of its components, either in whole or in part, without prior written consent from the Company. Additionally, the User shall not reproduce or duplicate the Product or related printed materials for distribution without obtaining prior written consent from the Company.
+
+2.3. In the event that the User infringes upon the copyrights of the Company through actions as described in the preceding clause, the Company reserves the right to seek compensation from the final User for all damages resulting from such copyright infringement.
+
+3. Automatic Updates
+
+3.1. The Product incorporates functionality that enables communication via the Internet as an integral part of its update mechanism. Automatic updates may, as necessary, involve installing various files on the User's computer, which is subject to change without prior notice. Consent for updates is implied by the acceptance of this Agreement, obviating the need for separate consent prior to each update. Notwithstanding the foregoing, updates and installations that legally mandate explicit consent from the User will necessitate obtaining such consent prior to implementation. 
+
+4. Responsibility for Privacy Protection
+
+4.1. In the KakaoTalk PC application, settings controlled by the User may enable automatic login. Once logged in, the User can access or export stored conversation content. Consequently, Users must exercise due diligence in managing their IDs and passwords. The User bears full responsibility for any issues arising from inadequate management of IDs/passwords or the use of automatic login features.
+
+5. Information Provision and Advertisement Placement
+
+5.1. The Company reserves the right to directly provide the User with advertising content related to, but not limited to, the Product during installation, updates, or usage. By proceeding with the installation or update, the User implicitly consents to receive such advertising content.
+
+5.2. All advertising content is managed in compliance with current legal standards and advertising regulations. 'Banner-type advertisements' provided do not fall under the category of 'spam' or 'illegal spam' as per the Information and Communications Network Act.
+
+5.3. Any interactions or transactions between the User and advertisers initiated through service-provided advertisements or promotional activities are strictly between the User and the advertiser. The Company disclaims any liability for disputes or issues arising from such interactions.
+
+5.4. The Company may provide targeted advertising to enhance user experience by minimizing unnecessary ad exposure and providing helpful information. The User can opt out of such targeted advertising at any time.
+
+Kakao Customized Advertising Opt-Out: <https://info.ad.daum.net/optout.do>
+
+6. Data Collection and Use
+
+6.1. The Company may collect anonymized data that does not identify individuals, such as the User's operating system, product version, and error details, to enhance the Product's quality.
+
+6.2. In cases of the Product's abnormal termination, user consent to error reporting will result in the transmission of related data to the Company's servers. This data, including user logs, operating system versions, and error module details, is exclusively used for troubleshooting and not for other purposes.
+
+6.3. The Company may collect cookie files that include the User's usage patterns of the Product for the purpose of ad display and improvement-related statistics.
+
+6.4. Further information on personal data protection is detailed in the Company's Privacy Policy.
+
+English Version:(<https://www.kakao.com/policy/privacy?lang=en&type=p>)
+
+7. Redistribution of Software 
+
+7.1. Distribution of the Product is exclusively conducted through the Company's official website (www.kakaocorp.com). 
+
+7.2. Neither the User nor any third party is authorized to redistribute the Product (including download links) via any channels or methods...
+
+8. Responsibility for Consequential Damages 
+
+8.1 With regard to the Product, the Company must not assure or guarantee any specific matters that are not prescribed in this Agreement within the scope permitted under the relevant laws and regulations. The Company shall provide no warranty on credibility and accuracy of information, data and fact posted in the Product in a way that the User write and shall take no responsibility for any loss occurred without the Company's negligence.
+
+8.2 The Company will compensate for any loss caused by its negligence, under this Agreement and the relevant laws and regulations; provided, however, that the Company shall take no responsibility for any loss occurred without its negligence as prescribed in the following subparagraphs. Furthermore, the Company shall take no liability for indirect, particular, consequential, disciplinary and punitive loss.
+(1) Any loss occurred in an uncontrollable state including natural disaster or equivalent force majeure
+(2) Product error due to reasons attributable to the User
+(3) Personal loss arising from access to or use of the Product
+(4) Any loss originated from illegal access to or use of the Company's Server by a third party
+(5) Any loss originated from impeded transmission to or from the Company's Server by a third party
+(6) Any loss originated from transmission or spread of malware by a third party
+(7) Any loss arising from use of the Product by a third-party including damage or defamation caused by omission, deletion, destruction, etc. of transmitted data
+(8) Any other loss arising from acts of the Company that are not intentional or negligent
+
+8.3 The Company shall take responsibility neither for any loss of expected profit from the Product use, nor for any damage caused by data from the Product
+
+8.4 The Company shall have no obligation to intervene in any conflict between you and a third-party regarding the Product and take no responsibility therefor.
+
+
+9. Termination and Cancellation of the Agreement 
+
+9.1. In the event of non-compliance by the User with the provisions of these Terms and Conditions, the Company retains the right to terminate the usage agreement without prejudice to its other rights. 
+
+9.2. Should the User disagree with these Terms and Conditions, they may terminate the agreement for using the Product at any point by uninstalling the software (i.e., deleting it). -- Software uninstallation procedure: Start > Control Panel > Change/Uninstall a Program. 
+
+9.3. Post-termination of the agreement, the User shall bear all liabilities arising from any unlawful or improper usage of the Product.
+
+10. Governing Law and Jurisdiction 
+
+10.1. These Terms and Conditions and the consequent usage agreement are governed and interpreted in accordance with the laws of the Republic of Korea. Any legal disputes arising between the Company and the User shall be subject to the jurisdiction of the competent courts as stipulated by the Civil Procedure Act of the Republic of Korea. 
+
+10.2. In cases involving Users with addresses or residences outside of Korea, any legal disputes between the Company and the User shall be exclusively subject to the jurisdiction of the Seoul Central District Court in the Republic of Korea as the court of first instance.
+
+11. Software Information and Contractual Inquiries 
+
+11.1. Relevant Website Information 
+Kakao Corporate Site: <https://www.kakaocorp.com/page/?lang=ENG&tab=all>
+ 
+KakaoTalk Operational Policy: <https://kakao.com/talksafety/en/policy>
+ 
+Kakao Customer Support Center: <https://cs.kakao.com/helps?locale=en&service=8>
+ 
+List of Relevant Open Source Licenses: <https://t1.daumcdn.net/osa/notice/26/1pqng5hSrM/notice.html>
+ 
+11.2 Characteristics of the Software 
+Logging into the KakaoTalk PC version enables users to freely send and receive messages, inclusive of media content, with other KakaoTalk users. 
+The KakaoTalk PC version allows users to access conversation histories shared on the linked mobile KakaoTalk application. However, the extent of accessible conversation histories may vary, subject to limitations on server storage duration and the timing of device authentication and KakaoTalk PC version reconnection. 
+
+11.3 System Requirements 
+Supported Operating Systems for KakaoTalk PC Version: 
+<https://cs.kakao.com/helps?category=5&locale=en&service=8&articleId=1073207076&device=16>
+ 
+The range of supported OS and versions for the Product may vary per the Company's policies, and non-compliance with updates may result in restricted access to the Product. 
+
+11.4 Contractual Inquiries 
+For any queries regarding the usage of the Product or questions pertaining to the Usage Rights Agreement, please refer to the following contact details: 
+ 
+Kakao Customer Service Center: <https://cs.kakao.com/requests>
+Inquiries via the App: Access the Mobile KakaoTalk App > More (…) > Settings (Gear Icon) > Customer Center/Operational Policy > Make an Inquiry/Chatbot Consultation
+
+Above, last updated on: August 12, 2025

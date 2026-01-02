@@ -1,0 +1,309 @@
+/* Reset / 기본 */
+* {
+    box-sizing: border-box;
+    font-family: 'Pretendard Variable';
+    line-height: 1.4;
+    letter-spacing: 0.04em
+}
+
+body {
+    margin: 0;
+    background-color: #fff;
+}
+
+/* 헤더 레이아웃 */
+.header {
+    height: 84px;
+    width: 60vw;
+    margin-left: 20vw;
+    padding: 0 14px 0 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* 왼쪽 영역: 로고들 */
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.logo {
+    width: 42px;
+    height: 42px;
+    object-fit: contain;
+}
+
+.text-logo {
+    height: 40px;
+    margin-top: 4px;
+    object-fit: contain;
+}
+
+/* 오른쪽 버튼 그룹 */
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* 공통 버튼 스타일 (요청 반영된 색상) */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #391C1E;
+    color: #FFE812;
+}
+
+/* 버튼 내 아이콘 크기: 22px (요청) */
+.btn img {
+    width: 22px;
+    height: 22px;
+    display: block;
+    object-fit: contain;
+}
+
+/* 호버 피드백 */
+.btn:hover {
+    background-color: #4A2326;
+    color: #FFF34D;
+}
+
+.btn-disconnect {
+    background-color: #4A4444;
+    color: #F4E452;
+}
+
+.btn-disconnect:hover {
+    background-color: #5C5555;
+    color: #FFF06A;
+}
+
+
+
+/*************** 메인 ****************/
+main {
+    width: 60vw;
+    height: calc(100vh - 100px);
+    margin-left: 20vw;
+    border-radius: 10px;
+    overflow: hidden;
+    position: relative;
+}
+
+.start-page {
+    height: 100%;
+    width: 100%;
+    z-index: 10000;
+    background-color: #212121;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.start-page-logo {
+    width: 40%;
+    margin-bottom: 46px;
+}
+
+.warning {
+    font-size: 20px;
+    margin-bottom: 16px;
+    color: #EEE;
+    font-weight: 500;
+}
+
+
+.warning-text {
+    font-size: 14px;
+    text-align: center;
+    color: #DDD;
+    margin-bottom: 46px;
+}
+
+.start-btn {
+    width: 300px;
+    height: 66px;
+    background-color: #FFE812;   /* 카카오 옐로우 */
+    color: #391C1E;
+    font-size: 24px;
+    font-weight: 600;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+}
+
+/* 마우스 올렸을 때 */
+.start-btn:hover {
+    background-color: #fff200;
+}
+
+/* 클릭했을 때 */
+.start-btn:active {
+    transform: translateY(2px);
+}
+
+iframe {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+
+
+
+/* --- 기존 스타일은 그대로 유지 --- */
+/* (생략) */
+
+/* OVERLAY */
+#modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.6);
+    z-index: 20000;
+    display: block;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    pointer-events: none;
+}
+#modal-overlay.show {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+/* MODAL 공통 */
+.modal {
+    position: fixed;
+    z-index: 21000;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%) scale(1.02);
+    width: 520px;
+    max-width: calc(100% - 40px);
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.18s ease, opacity 0.18s ease;
+    opacity: 0;
+    pointer-events: none;
+}
+.modal.show {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+    pointer-events: auto;
+}
+
+.modal-header {
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding: 16px 20px;
+    border-bottom: 1px solid #eee;
+}
+.modal-header h2 {
+    margin:0;
+    font-size:18px;
+}
+.modal-close {
+    background: transparent;
+    border: none;
+    font-size: 22px;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 16px 20px;
+    max-height: 60vh;
+    overflow: auto;
+}
+
+.modal-footer {
+    padding: 12px 20px;
+    display: flex;
+    gap: 8px;
+    justify-content: flex-end;
+    border-top: 1px solid #eee;
+}
+
+/* DROPZONE */
+.dropzone {
+    display: block;
+    border: 2px dashed #d6d6d6;
+    border-radius: 8px;
+    padding: 26px;
+    text-align:center;
+    cursor: pointer;
+    margin: 12px 0;
+    transition: background 0.12s ease, border-color 0.12s ease;
+    user-select: none;
+}
+.dropzone .dropzone-text {
+    color: #666;
+    font-size: 14px;
+}
+.dropzone.dragover {
+    background: #f7f7f9;
+    border-color: #999;
+}
+
+/* 파일 목록 */
+/* 트리 노드 레이아웃 강제 */
+
+.file-list {
+    margin: 8px 0 0 0;
+    padding: 0;
+    list-style: none;
+    max-height: 160px;
+    overflow: auto;
+}
+.file-list li {
+    padding: 6px 8px;
+    border-radius: 6px;
+    background: #fafafa;
+    margin-bottom: 6px;
+    font-size: 13px;
+    display:flex;
+    justify-content:space-between;
+    gap: 8px;
+}
+.small-muted { color: #888; font-size: 13px; margin-bottom: 8px; }
+
+/* tree-container 스타일 */
+#tree-container {
+    min-height: 120px;
+}
+.hidden { display: none !important; }
+
+
+ul, ol {
+    list-style: none;
+}
+
+ul {
+    padding-left: 20px;
+}
+
+li {
+    padding: 2px 0;
+}
+
+.treeview-expander {
+    display: none
+}

@@ -1,0 +1,403 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Items>
+  <!--Win32 UI를 구성하는 컬러 차트입니다. 투명도가 있는 컬러와 솔리드 컬러로 구분되며 이곳에 정의된 색상만 사용합니다.-->  
+
+  <!--Black-->
+  <Color><ID>B100</ID><Data>000000</Data></Color>
+  <Color><ID>B85</ID><Data>191919</Data></Color>
+  <Color><ID>B70</ID><Data>424242</Data></Color>
+  <Color><ID>B60</ID><Data>595959</Data></Color>
+  <Color><ID>B55</ID><Data>696969</Data></Color>
+  <Color><ID>B50</ID><Data>767676</Data></Color>
+  <Color><ID>B40</ID><Data>949494</Data></Color>
+  <Color><ID>B30</ID><Data>B3B3B3</Data></Color>
+  <Color><ID>B25</ID><Data>BFBFBF</Data></Color>
+  <Color><ID>B20</ID><Data>CCCCCC</Data></Color>
+  <Color><ID>B15</ID><Data>D9D9D9</Data></Color>
+  <Color><ID>B10</ID><Data>E6E6E6</Data></Color>
+  <Color><ID>B5</ID><Data>EDEDED</Data></Color>
+  <Color><ID>B3</ID><Data>F5F5F5</Data></Color>
+  <Color><ID>B0</ID><Data>FFFFFF</Data></Color>
+  <AlphaColor><ID>B85_A</ID><Data>000000E6</Data></AlphaColor>
+  <AlphaColor><ID>B70_A</ID><Data>000000BD</Data></AlphaColor>
+  <AlphaColor><ID>B60_A</ID><Data>000000A3</Data></AlphaColor>
+  <AlphaColor><ID>B55_A</ID><Data>00000096</Data></AlphaColor>
+  <AlphaColor><ID>B50_A</ID><Data>0000008A</Data></AlphaColor>
+  <AlphaColor><ID>B40_A</ID><Data>0000006B</Data></AlphaColor>
+  <AlphaColor><ID>B30_A</ID><Data>0000004C</Data></AlphaColor>
+  <AlphaColor><ID>B25_A</ID><Data>00000040</Data></AlphaColor>
+  <AlphaColor><ID>B20_A</ID><Data>00000033</Data></AlphaColor>
+  <AlphaColor><ID>B15_A</ID><Data>00000026</Data></AlphaColor>
+  <AlphaColor><ID>B10_A</ID><Data>00000019</Data></AlphaColor>
+  <AlphaColor><ID>B5_A</ID><Data>00000012</Data></AlphaColor>
+  <AlphaColor><ID>B3_A</ID><Data>0000000A</Data></AlphaColor>
+
+
+
+  <!--White-->
+  <Color><ID>W100</ID><Data>FFFFFF</Data></Color>
+  <Color><ID>W85</ID><Data>EDEDED</Data></Color>
+  <Color><ID>W70</ID><Data>BEBEBE</Data></Color>
+  <Color><ID>W60</ID><Data>ABABAB</Data></Color>
+  <Color><ID>W50</ID><Data>939393</Data></Color>
+  <Color><ID>W40</ID><Data>7D7D7D</Data></Color>
+  <Color><ID>W30</ID><Data>696969</Data></Color>
+  <Color><ID>W25</ID><Data>5C5C5C</Data></Color>
+  <Color><ID>W20</ID><Data>4E4E4E</Data></Color>
+  <Color><ID>W10</ID><Data>434343</Data></Color>
+  <Color><ID>W5</ID><Data>383838</Data></Color>
+  <Color><ID>W3</ID><Data>2D2D2D</Data></Color>
+  <Color><ID>W0</ID><Data>222222</Data></Color>
+  <AlphaColor><ID>W100_A</ID><Data>FFFFFFFF</Data></AlphaColor>
+  <AlphaColor><ID>W85_A</ID><Data>FFFFFFE6</Data></AlphaColor><!--다크용 투명도 올림 90%-->
+  <AlphaColor><ID>W70_A</ID><Data>FFFFFFB2</Data></AlphaColor>
+  <AlphaColor><ID>W60_A</ID><Data>FFFFFF99</Data> </AlphaColor>
+  <AlphaColor><ID>W50_A</ID><Data>FFFFFF80</Data></AlphaColor>
+  <AlphaColor><ID>W40_A</ID><Data>FFFFFF66</Data></AlphaColor>
+  <AlphaColor><ID>W30_A</ID><Data>FFFFFF4C</Data></AlphaColor>
+  <AlphaColor><ID>W25_A</ID><Data>FFFFFF40</Data></AlphaColor>
+  <AlphaColor><ID>W20_A</ID><Data>FFFFFF33</Data></AlphaColor>
+  <AlphaColor><ID>W14_A</ID><Data>FFFFFF24</Data></AlphaColor>
+  <AlphaColor><ID>W10_A</ID><Data>FFFFFF1E</Data></AlphaColor><!--다크용 투명도 올림 12%-->
+  <AlphaColor><ID>W5_A</ID><Data>FFFFFF12</Data></AlphaColor><!--다크용 투명도 올림 7%-->
+  <AlphaColor><ID>W3_A</ID><Data>FFFFFF0A</Data></AlphaColor><!--다크용 투명도 올림 4%-->
+
+
+  <!--Yellow-->
+  <Color><ID>Y100</ID><Data>FEE500</Data></Color>
+  <Color><ID>Y100H</ID><Data>FADA0A</Data></Color><!--버튼 호버 컬러-->
+  <Color><ID>Y100D</ID><Data>F2D00F</Data></Color><!--버튼 다운 컬러-->
+  <Color><ID>Y50</ID><Data>FFF280</Data></Color>
+  <AlphaColor><ID>Y70_A</ID><Data>FEE500B2</Data></AlphaColor>  
+  <AlphaColor><ID>Y60_A</ID><Data>FEE50099</Data></AlphaColor>
+  <AlphaColor><ID>Y25_A</ID><Data>FEE50040</Data></AlphaColor>
+
+
+  <!--Red-->
+  <Color><ID>R100</ID><Data>F4551E</Data></Color>
+  <Color><ID>R50</ID><Data>F9AA8E</Data></Color>
+  <AlphaColor><ID>R10_A</ID><Data>F4551E19</Data></AlphaColor>
+
+
+  <!--Blue-->
+  <Color><ID>BE</ID><Data>0A73DC</Data></Color>
+  <Color><ID>BE5</ID><Data>F3F8FD</Data></Color>
+  <AlphaColor><ID>BE10_A</ID><Data>0A73DC19</Data></AlphaColor>
+
+  <!--Openchat-->
+  <Color><ID>OPEN01</ID><Data>666D77</Data></Color>
+  <Color><ID>OPEN02</ID><Data>4EB985</Data></Color>
+  <Color><ID>OPEN03</ID><Data>DA8278</Data></Color>
+  <Color><ID>OPEN04</ID><Data>6C9FCD</Data></Color>
+  <Color><ID>OPEN05</ID><Data>7369A0</Data></Color>
+  <Color><ID>OPEN06</ID><Data>FF63C3</Data></Color>
+  <Color><ID>OPEN07</ID><Data>4A90E2</Data></Color>
+  <Color><ID>OPENLINK_BG_01</ID><Data>626d7c</Data></Color>
+  <Color><ID>OPENLINK_BG_02</ID><Data>00a570</Data></Color>
+  <Color><ID>OPENLINK_BG_03</ID><Data>d06f68</Data></Color>
+  <Color><ID>OPENLINK_BG_04</ID><Data>6a5d93</Data></Color>
+  <Color><ID>OPENLINK_BG_05</ID><Data>5390bc</Data></Color>
+
+  <!--ChatRoomBackground_Color-->
+  <Color><ID>CHATBG01</ID><Data>BACEE0</Data></Color>
+  <Color><ID>CHATBG02</ID><Data>677BAC</Data></Color>
+  <Color><ID>CHATBG03</ID><Data>9DCDB8</Data></Color>
+  <Color><ID>CHATBG04</ID><Data>51A5A0</Data></Color>
+  <Color><ID>CHATBG05</ID><Data>9BB157</Data></Color>
+  <Color><ID>CHATBG06</ID><Data>F8CD59</Data></Color>
+  <Color><ID>CHATBG07</ID><Data>F99460</Data></Color>
+  <Color><ID>CHATBG08</ID><Data>F68181</Data></Color>
+  <Color><ID>CHATBG09</ID><Data>F7A2BD</Data></Color>
+  <Color><ID>CHATBG10</ID><Data>5B4D49</Data></Color>
+  <Color><ID>CHATBG11</ID><Data>D3D5D0</Data></Color>
+  <Color><ID>CHATBG12</ID><Data>525252</Data></Color>
+  <Color><ID>CHATBG13</ID><Data>404372</Data></Color>
+  <Color><ID>CHATBG14</ID><Data>10374A</Data></Color>
+  <Color><ID>CHATBG15</ID><Data>818B9C</Data></Color>
+
+  <!-- AD 톡 디자인 가이드와 분리할 수 있도록 코드를 다르게 간다. -->
+  <Color><ID>ADB100</ID><Data>000000</Data></Color>
+  <Color><ID>ADB87</ID><Data>222222</Data></Color>
+  <Color><ID>ADB50</ID><Data>808080</Data></Color>
+  <Color><ID>ADB10</ID><Data>E6E6E6</Data></Color>
+  <Color><ID>ADB3</ID><Data>F8F8F8</Data></Color>
+  <AlphaColor><ID>ADW60_A</ID><Data>FFFFFF99</Data></AlphaColor>
+  <Color><ID>ADW100</ID><Data>FFFFFF</Data></Color>
+  
+  <!-- SnowChatRoom -->
+  <Color><ID>UNREAD_SNOW01</ID><Data>4A5F89</Data></Color>
+  <Color><ID>UNREAD_SNOW02</ID><Data>B6CEFE</Data></Color>
+
+  
+  <!-- melon용 색상-->
+  <Color><ID>G100</ID><Data>00CD3C</Data></Color>
+	
+  
+  <!-- VoiceRoom -->
+  <Color><ID>VRBG100</ID><Data>151515</Data></Color>
+
+  
+  <!-- 프로필 -->
+  <Color><ID>CHOONSIK_GAUGE</ID><Data>ED8D00</Data></Color>
+  <Color><ID>JORDY_GAUGE</ID><Data>48CA7A</Data></Color>
+
+  <!-- 마크다운 -->
+  <Color><ID>INLINECODE_BKCOLOR_MYCHATLOG</ID><Data>E5CE00</Data></Color>
+  <Color><ID>INLINECODE_BKCOLOR_MYCHATLOG_EXCEL</ID><Data>E5E1CA</Data></Color>
+  
+  <!-- 2.0에서 넘어온 색상 이후 필터링 과정을 거치면서 추가로 삭제 예정-->
+  <AlphaColor><ID>FLGRAY</ID><Data>404040D8</Data></AlphaColor>
+
+	<!-- 브라운 완전 제거 전까지 이 코드로 통합 유지 -->
+  <Color><ID>BROWN_01</ID><Data>423630</Data></Color>
+	<Color><ID>BROWN_02</ID><Data>544a44</Data></Color>
+	<Color><ID>BROWN_03</ID><Data>29211e</Data></Color>
+
+  <!-- CustomProfile BG Color-->
+  <Color><ID>CP01</ID><Data>FFDF00</Data></Color>
+  <Color><ID>CP02</ID><Data>F14E4E</Data></Color>
+  <Color><ID>CP03</ID><Data>FA7F60</Data></Color>
+  <Color><ID>CP04</ID><Data>F59630</Data></Color>
+  <Color><ID>CP05</ID><Data>8EBD32</Data></Color>
+  <Color><ID>CP06</ID><Data>49A367</Data></Color>
+  <Color><ID>CP07</ID><Data>23A597</Data></Color>
+  <Color><ID>CP08</ID><Data>28A6B4</Data></Color>
+  <Color><ID>CP09</ID><Data>429ED5</Data></Color>
+  <Color><ID>CP10</ID><Data>4569A3</Data></Color>
+  <Color><ID>CP11</ID><Data>745FAB</Data></Color>
+  <Color><ID>CP12</ID><Data>9359B8</Data></Color>
+  <Color><ID>CP13</ID><Data>D25698</Data></Color>
+  <Color><ID>CP14</ID><Data>D9466B</Data></Color>
+  <Color><ID>CP15</ID><Data>FFF18D</Data></Color>
+  <Color><ID>CP16</ID><Data>F09895</Data></Color>
+  <Color><ID>CP17</ID><Data>EE9E8A</Data></Color>
+  <Color><ID>CP18</ID><Data>EDB477</Data></Color>
+  <Color><ID>CP19</ID><Data>B1C36D</Data></Color>
+  <Color><ID>CP20</ID><Data>80CF91</Data></Color>
+  <Color><ID>CP21</ID><Data>8ACAC3</Data></Color>
+  <Color><ID>CP22</ID><Data>96C7D1</Data></Color>
+  <Color><ID>CP23</ID><Data>7FB8DA</Data></Color>
+  <Color><ID>CP24</ID><Data>87A4D4</Data></Color>
+  <Color><ID>CP25</ID><Data>AE9DDC</Data></Color>
+  <Color><ID>CP26</ID><Data>B885CD</Data></Color>
+  <Color><ID>CP27</ID><Data>E581B6</Data></Color>
+  <Color><ID>CP28</ID><Data>EC9DAF</Data></Color>
+  <Color><ID>CP29</ID><Data>F9F4D1</Data></Color>
+  <Color><ID>CP30</ID><Data>FBDADA</Data></Color>
+  <Color><ID>CP31</ID><Data>FCD5CB</Data></Color>
+  <Color><ID>CP32</ID><Data>F3D9BC</Data></Color>
+  <Color><ID>CP33</ID><Data>E8F4BA</Data></Color>
+  <Color><ID>CP34</ID><Data>BDEBC7</Data></Color>
+  <Color><ID>CP35</ID><Data>CFF0F2</Data></Color>
+  <Color><ID>CP36</ID><Data>C5EFF4</Data></Color>
+  <Color><ID>CP37</ID><Data>C7E5F7</Data></Color>
+  <Color><ID>CP38</ID><Data>CDDCF3</Data></Color>
+  <Color><ID>CP39</ID><Data>DED9F4</Data></Color>
+  <Color><ID>CP40</ID><Data>E2D0EE</Data></Color>
+  <Color><ID>CP41</ID><Data>F8D4E7</Data></Color>
+  <Color><ID>CP42</ID><Data>FCE0E7</Data></Color>
+  <Color><ID>CP43</ID><Data>1B1B1B</Data></Color>
+  <Color><ID>CP44</ID><Data>C4C4C4</Data></Color>
+  <Color><ID>CP45</ID><Data>FFFFFF</Data></Color>
+
+  <Color><ID>EXCEL_CELL_LINE</ID><Data>CED6E7</Data></Color> <!-- @alban.b 7차에 디자인 개편하면서 지워주세요-->
+
+  <!-- 디자인확인필요 -->
+  <Color><ID>CALENDAR_BIRTHDAY_BG</ID><Data>F4BD02</Data></Color>
+  <Color><ID>CALENDAR_TIME_BG</ID><Data>B2D7FF</Data></Color>
+
+  
+  <Color><ID>CALENDAR_EVENT_COLOR_ROYALBLUE</ID><Data>2d69e0</Data></Color>
+  <Color><ID>CALENDAR_EVENT_COLOR_NAVYBLUE</ID><Data>223788</Data></Color>
+  <Color><ID>CALENDAR_EVENT_COLOR_RED</ID><Data>d42726</Data></Color>
+  <Color><ID>CALENDAR_EVENT_COLOR_PINK</ID><Data>ed5683</Data></Color>
+  
+  <Color><ID>CALENDAR_EVENT_COLOR_ORAGNE</ID><Data>ff9429</Data></Color>
+  <Color><ID>CALENDAR_EVENT_COLOR_GREEN</ID><Data>149959</Data></Color>
+  <Color><ID>CALENDAR_EVENT_COLOR_LIME</ID><Data>7cb343</Data></Color>
+  <Color><ID>CALENDAR_EVENT_COLOR_OLIVE</ID><Data>a4ad15</Data></Color>
+  <Color><ID>CALENDAR_EVENT_COLOR_MINT</ID><Data>5cc5be</Data></Color>
+  
+  <Color><ID>CALENDAR_EVENT_COLOR_MAGENTA</ID><Data>ab47bc</Data></Color>
+  <Color><ID>CALENDAR_EVENT_COLOR_VIOLET</ID><Data>8a4b9b</Data></Color>
+  <Color><ID>CALENDAR_EVENT_COLOR_LAVENDAR</ID><Data>7986cb</Data></Color>
+  <Color><ID>CALENDAR_EVENT_COLOR_BROWN</ID><Data>945c1f</Data></Color>
+  <Color><ID>CALENDAR_EVENT_COLOR_GRAY</ID><Data>666666</Data></Color>
+  
+  <Color><ID>PROFILE_BG_DEFAULT_AVG</ID><Data>918b84</Data></Color>
+  
+  <!-- EmoticonText Color -->
+  <Color><ID>CMPOINT01</ID><Data>9DC7F1</Data></Color>
+  <Color><ID>CMPOINT02</ID><Data>9CB758</Data></Color>
+
+  <!-- Chat Utility Guide Color -->
+  <Color><ID>CHATUTILITY_GUIDE_SPACE</ID><Data>0a73dc</Data></Color>
+  <Color><ID>CHATUTILITY_GUIDE_SPELL</ID><Data>ee0014</Data></Color>
+  <Color><ID>CHATUTILITY_GUIDE_SPACE_SPELL</ID><Data>008a29</Data></Color>
+
+  <!-- Chat bot Color -->
+  <Color><ID>CHAT_BOT_DESCRIPTION</ID><Data>e8f1ff</Data></Color>
+  
+  <!-- Universal Balloon Color -->
+  <Color>
+    <ID>GRAY990S</ID>
+    <Data>000000</Data>
+  </Color>
+  <Color>
+    <ID>GRAY900S</ID>
+    <Data>000000</Data>
+  </Color>
+  <Color>
+    <ID>GRAY800S</ID>
+    <Data>000000</Data>
+  </Color>
+  <Color>
+    <ID>GRAY700S</ID>
+    <Data>424242</Data>
+  </Color>
+  <Color>
+    <ID>GRAY600S</ID>
+    <Data>595959</Data>
+  </Color>
+  <Color>
+    <ID>GRAY570S</ID>
+    <Data>696969</Data>
+  </Color>
+  <Color>
+    <ID>GRAY550S</ID>
+    <Data>767676</Data>
+  </Color>
+  <Color>
+    <ID>GRAY520S</ID>
+    <Data>000000</Data>
+  </Color>
+  <Color>
+    <ID>GRAY500S</ID>
+    <Data>949494</Data>
+  </Color>
+  <Color>
+    <ID>GRAY400S</ID>
+    <Data>B3B3B3</Data>
+  </Color>
+  <Color>
+    <ID>GRAY300S</ID>
+    <Data>CCCCCC</Data>
+  </Color>
+  <AlphaColor>
+    <ID>GRAY300A</ID>
+    <Data>00000033</Data>
+  </AlphaColor>
+  <AlphaColor>
+    <ID>GRAY200A</ID>
+    <Data>00000026</Data>
+  </AlphaColor>
+  <AlphaColor>
+    <ID>GRAY150A</ID>
+    <Data>0000001A</Data>
+  </AlphaColor>
+  <AlphaColor>
+    <ID>GRAY120A</ID>
+    <Data>0000001A</Data>
+  </AlphaColor>
+  <AlphaColor>
+    <ID>GRAY100A</ID>
+    <Data>00000012</Data>
+  </AlphaColor>
+  <Color>
+    <ID>GRAY070S</ID>
+    <Data>000000</Data>
+  </Color>
+  <AlphaColor>
+    <ID>GRAY070A</ID>
+    <Data>00000012</Data>
+  </AlphaColor>
+  <Color>
+    <ID>GRAY050S</ID>
+    <Data>000000</Data>
+  </Color>
+  <AlphaColor>
+    <ID>GRAY050A</ID>
+    <Data>0000000A</Data>
+  </AlphaColor>
+  <Color>
+    <ID>GRAY002S</ID>
+    <Data>000000</Data>
+  </Color>
+  <Color>
+    <ID>GRAY001S</ID>
+    <Data>000000</Data>
+  </Color>
+  <Color>
+    <ID>GRAY000S</ID>
+    <Data>000000</Data>
+  </Color>
+  <AlphaColor>
+    <ID>GRAY000A</ID>
+    <Data>000000</Data>
+  </AlphaColor>
+  <Color>
+    <ID>WHITE003S</ID>
+    <Data>FFFFFF</Data>
+  </Color>
+  <Color>
+    <ID>WHITE002S</ID>
+    <Data>FFFFFF</Data>
+  </Color>
+  <Color>
+    <ID>WHITE001S</ID>
+    <Data>000000</Data>
+  </Color>
+  <Color>
+    <ID>WHITE000S</ID>
+    <Data>000000</Data>
+  </Color>
+  <Color>
+    <ID>YELLOW500S</ID>
+    <Data>FEE500</Data>
+  </Color>
+  <Color>
+    <ID>BLUE500S</ID>
+    <Data>0A73DC</Data>
+  </Color>
+  <Color>
+    <ID>BLUE300S</ID>
+    <Data>000000</Data>
+  </Color>
+  <Color>
+    <ID>RED500S</ID>
+    <Data>F4551E</Data>
+  </Color>
+  <AlphaColor>
+    <ID>RED300A</ID>
+    <Data>000000</Data>
+  </AlphaColor>
+  <AlphaColor>
+    <ID>RED120A</ID>
+    <Data>000000</Data>
+  </AlphaColor>
+  <Color>
+    <ID>GREEN600S</ID>
+    <Data>05AC36</Data>
+  </Color>
+  <Color>
+    <ID>GREEN500S</ID>
+    <Data>000000</Data>
+  </Color>
+  <Color>
+    <ID>LIGHTGRAY900S</ID>
+    <Data>000000</Data>
+  </Color>
+  <Color>
+    <ID>LIGHTWHITE000S</ID>
+    <Data>FFFFFF</Data>
+  </Color>
+  <Color>
+    <ID>LIGHTBLUE500S</ID>
+    <Data>0A73DC</Data>
+  </Color>
+  <Color>
+    <ID>DARKWHITE003S</ID>
+    <Data>353535</Data>
+  </Color>
+
+</Items>

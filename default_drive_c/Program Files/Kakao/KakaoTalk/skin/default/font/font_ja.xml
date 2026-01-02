@@ -1,0 +1,82 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<resource>
+	<font id="Font29" 	font_size="29" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+	<font id="Font22" 	font_size="22" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+	<font id="Font20" 	font_size="20" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+	<font id="Font19" 	font_size="19" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+	<font id="Font18" 	font_size="18" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+	<font id="Font16" 	font_size="16" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+	<font id="Font15" 	font_size="15" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+	<font id="Font14" 	font_size="14" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+	<font id="Font13" 	font_size="13" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+	<font id="Font12" 	font_size="12" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+	<font id="Font11" 	font_size="11" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+	<font id="Font10" 	font_size="10" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+	<font id="Font9" 	font_size="9"	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%" draw_cache="true"/>
+	<font id="Font8" 	font_size="8"	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%" draw_cache="true"/>
+	<font id="Font7" 	font_size="7"	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+	<font id="Font6" 	font_size="6"	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+
+	<font id="Font20b"	font_size="20" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" min_internal_margin="25%"/>
+	<font id="Font19b"	font_size="19" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" min_internal_margin="25%"/>
+	<font id="Font18b"	font_size="18" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" min_internal_margin="25%"/>
+	<font id="Font16b"	font_size="16" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" min_internal_margin="25%"/>
+	<font id="Font15b"	font_size="15" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" min_internal_margin="25%"/>
+	<font id="Font14b"	font_size="14" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" min_internal_margin="25%"/>
+	<font id="Font13b"	font_size="13" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" min_internal_margin="25%"/>
+	<font id="Font12b"	font_size="12" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" min_internal_margin="25%"/>
+	<font id="Font11b"	font_size="11" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" min_internal_margin="25%"/>
+	<font id="Font10b"	font_size="10" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" min_internal_margin="25%"/>
+	<font id="Font10u"	font_size="10" font_family="Meiryo UI" font_family_ko="Malgun Gothic" underline="true" min_internal_margin="25%"/>
+	<font id="Font10bu"	font_size="10" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" underline="true" min_internal_margin="25%"/>
+  <font id="Font10s"	font_size="10" font_family="Meiryo UI" font_family_ko="Malgun Gothic" strikeout="true" min_internal_margin="25%"/>
+  <font id="Font9i" font_size="9"	italic="true" font_family="Arial" font_family_ko="Malgun Gothic" font_family_ja="Meiryo UI" min_internal_margin="25%"/>
+	<font id="Font9bu"	font_size="9" font_family="Meiryo UI" font_family_ko="Malgun Gothic" underline="true" bold="true" min_internal_margin="25%"/>
+	<font id="Font9b"	font_size="9" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" min_internal_margin="25%" draw_cache="true"/>
+	<font id="Font9u"	font_size="9" font_family="Meiryo UI" font_family_ko="Malgun Gothic" underline="true" min_internal_margin="25%"/>
+	<font id="Font9s"	font_size="9" font_family="Meiryo UI" font_family_ko="Malgun Gothic" strikeout="true" min_internal_margin="25%"/>
+  <font id="Font9bs"	font_size="9" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" strikeout="true" min_internal_margin="25%"/>
+	<font id="Font8u"	font_size="8" font_family="Meiryo UI" font_family_ko="Malgun Gothic" underline="true" min_internal_margin="25%"/>
+	<font id="Font8b"	font_size="8" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" min_internal_margin="25%"/>
+  <font id="Font8bu"	font_size="8" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" underline="true" min_internal_margin="25%"/>
+  <font id="Font8s"	font_size="8" font_family="Meiryo UI" strikeout="true" font_family_ja="Meiryo UI" min_internal_margin="25%"/>
+	<font id="Font6b"	font_size="6" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" min_internal_margin="25%"/>
+
+	<font id="NumeralFont28" font_size="28" font_family="Arial" min_internal_margin="25%"/>
+	<font id="NumeralFont22" font_size="22" font_family="Arial" min_internal_margin="25%"/>
+	<font id="NumeralFont20" font_size="20" font_family="Arial" min_internal_margin="25%"/>
+  <font id="NumeralFont18b" font_size="18" font_family="Arial" bold="true" min_internal_margin="25%"/>
+  <font id="NumeralFont18" font_size="18" font_family="Arial" min_internal_margin="25%"/>
+  <font id="NumeralFont15b" font_size="15" font_family="Arial" bold="true" min_internal_margin="25%"/>
+  <font id="NumeralFont15" font_size="15" font_family="Arial" min_internal_margin="25%"/>
+	<font id="NumeralFont14" font_size="14" font_family="Arial" min_internal_margin="25%"/>
+  <font id="NumeralFont13b" font_size="13" font_family="Arial" bold="true" min_internal_margin="25%"/>
+  <font id="NumeralFont12b" font_size="12" font_family="Arial" bold="true" min_internal_margin="25%"/>
+	<font id="NumeralFont12" font_size="12" font_family="Arial" min_internal_margin="25%"/>
+	<font id="NumeralFont11" font_size="11" font_family="Arial" min_internal_margin="25%"/>
+	<font id="NumeralFont10" font_size="10" font_family="Arial" min_internal_margin="25%"/>
+  <font id="NumeralFont10s" font_size="10" font_family="Arial" strikeout="true" min_internal_margin="25%"/>
+	<font id="NumeralFont9b" font_size="9" font_family="Arial" bold="true" min_internal_margin="25%"/>
+  <font id="NumeralFont9" font_size="9" font_family="Arial" min_internal_margin="25%"/>
+  <font id="NumeralFont8" font_size="8" font_family="Arial" min_internal_margin="25%"/>
+	<font id="NumeralFont8b" font_size="8" font_family="Arial" bold="true" min_internal_margin="25%"/>
+  <font id="NumeralFont7" font_size="7" font_family="Arial" min_internal_margin="25%"/>
+  <font id="NumeralFont7b" font_size="7" font_family="Arial" bold="true" min_internal_margin="25%"/>
+
+  <font id="ArialBlackFont8" font_size="8" font_family="Arial Black" min_internal_margin="25%"/>
+
+  <user_font id="font_findPassword" font_id="Font9b" />
+	<user_font id="font_contactList_extend_menu" font_id="Font9" />
+	<user_font id="font_chatBackgroundSetting" font_id="Font9" />
+
+	<user_font id="font_chatLogMsg_small" font_id="Font8" />
+	<user_font id="font_chatLogMsg_small_u" font_id="Font8u" />
+	<user_font id="font_chatLogMsg" font_id="Font9" />
+	<user_font id="font_chatLogMsg_b" font_id="Font9b" />
+	<user_font id="font_chatLogMsg_u" font_id="Font9u" />
+	<user_font id="font_chatLogName" font_id="Font9" />
+
+	<user_font id="font_basicSetting_family" font_id="Font9" />
+
+	<font id="LogFont11b"	log_font_size="11" font_family="Meiryo UI" font_family_ko="Malgun Gothic" bold="true" min_internal_margin="25%"/>
+</resource>

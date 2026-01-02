@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<resource>
+  <user_font id="Head01"	font_id="Font15"/>
+  <user_font id="Head02"	font_id="Font13"/>
+  <user_font id="Head03"	font_id="Font12"/>
+  <user_font id="Body01"	font_id="Font11"/>
+  <user_font id="Body02"	font_id="Font10"/>
+  <user_font id="Sub01"		font_id="Font9"/>
+  <user_font id="Sub02"		font_id="Font8"/>
+  <user_font id="Sub03"		font_id="Font7"/>
+
+  <user_font id="Head01_B"	font_id="Font15b"/>
+  <user_font id="Head02_B"	font_id="Font13b"/>
+  <user_font id="Head03_B"	font_id="Font12b"/>
+  <user_font id="Body01_B"	font_id="Font11b"/>
+  <user_font id="Body02_B"	font_id="Font10b"/>
+  <user_font id="Sub01_B" 	font_id="Font9b"/>
+  <user_font id="Sub02_B"		font_id="Font8b"/>
+  
+  <font id="Head01_I"	italic="true" font_size="15" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head02_I"	italic="true" font_size="13" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head03_I"	italic="true" font_size="12" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body01_I"	italic="true" font_size="11" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body02_I"	italic="true" font_size="10" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Sub01_I" 	italic="true" font_size="9"  font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Sub02_I" 	italic="true" font_size="8"  font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+
+  <font id="Head01_U"	underline="true" font_size="15" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head02_U"	underline="true" font_size="13" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head03_U"	underline="true" font_size="12" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body01_U"	underline="true" font_size="11" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <user_font id="Body02_U"	font_id="Font10u"/>
+  <user_font id="Sub01_U" 	font_id="Font9u"/>
+  <user_font id="Sub02_U" 	font_id="Font8u"/>
+
+  <font id="Head01_S"	strikeout="true" font_size="15" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head02_S"	strikeout="true" font_size="13" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head03_S"	strikeout="true" font_size="12" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body01_S"	strikeout="true" font_size="11" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body02_S"	strikeout="true" font_size="10" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Sub01_S" 	strikeout="true" font_size="9" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Sub02_S" 	strikeout="true" font_size="8" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+
+  <font id="Head01_BI"	bold="true" italic="true" font_size="15" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head02_BI"	bold="true" italic="true" font_size="13" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head03_BI"	bold="true" italic="true" font_size="12" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body01_BI"	bold="true" italic="true" font_size="11" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body02_BI"	bold="true" italic="true" font_size="10" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Sub01_BI" 	bold="true" italic="true" font_size="9" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Sub02_BI" 	bold="true" italic="true" font_size="8" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+
+  <font id="Head01_BU"	bold="true" underline="true" font_size="15" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head02_BU"	bold="true" underline="true" font_size="13" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head03_BU"	bold="true" underline="true" font_size="12" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body01_BU"	bold="true" underline="true" font_size="11" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body02_BU"	bold="true" underline="true" font_size="10" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Sub01_BU" 	bold="true" underline="true" font_size="9" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Sub02_BU" 	bold="true" underline="true" font_size="8" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+
+  <font id="Head01_IU"	italic="true" underline="true" font_size="15" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head02_IU"	italic="true" underline="true" font_size="13" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head03_IU"	italic="true" underline="true" font_size="12" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body01_IU"	italic="true" underline="true" font_size="11" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body02_IU"	italic="true" underline="true" font_size="10" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Sub01_IU" 	italic="true" underline="true" font_size="9" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Sub02_IU" 	italic="true" underline="true" font_size="8" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+
+  <font id="Head01_IS"	italic="true" strikeout="true" font_size="15" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head02_IS"	italic="true" strikeout="true" font_size="13" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head03_IS"	italic="true" strikeout="true" font_size="12" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body01_IS"	italic="true" strikeout="true" font_size="11" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body02_IS"	italic="true" strikeout="true" font_size="10" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Sub01_IS" 	italic="true" strikeout="true" font_size="9" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Sub02_IS" 	italic="true" strikeout="true" font_size="8" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+
+  <font id="Head01_BIU"	bold="true" italic="true" underline="true" font_size="15" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head02_BIU"	bold="true" italic="true" underline="true" font_size="13" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head03_BIU"	bold="true" italic="true" underline="true" font_size="12" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body01_BIU"	bold="true" italic="true" underline="true" font_size="11" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body02_BIU"	bold="true" italic="true" underline="true" font_size="10" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Sub01_BIU" 	bold="true" italic="true" underline="true" font_size="9" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Sub02_BIU" 	bold="true" italic="true" underline="true" font_size="8" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+
+  <font id="Head01_BIS"	bold="true" italic="true" strikeout="true" font_size="15" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head02_BIS"	bold="true" italic="true" strikeout="true" font_size="13" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Head03_BIS"	bold="true" italic="true" strikeout="true" font_size="12" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body01_BIS"	bold="true" italic="true" strikeout="true" font_size="11" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Body02_BIS"	bold="true" italic="true" strikeout="true" font_size="10" font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Sub01_BIS" 	bold="true" italic="true" strikeout="true" font_size="9" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+  <font id="Sub02_BIS" 	bold="true" italic="true" strikeout="true" font_size="8" 	font_family="Meiryo UI" font_family_ko="Malgun Gothic" min_internal_margin="25%"/>
+
+</resource>

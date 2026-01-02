@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>KakaoTalk WEB</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="icon" type="image/svg+xml" href="./img/logo.svg">
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css"
+        crossorigin>
+</head>
+
+<body>
+
+    <header class="header">
+        <div class="header-left">
+            <img src="./img/logo.svg" alt="KakaoTalk Logo" class="logo" />
+            <img src="./img/text-logo.svg" alt="KakaoTalk WEB" class="text-logo" />
+        </div>
+
+        <div class="header-right">
+            <button id="disconnect" class="btn btn-disconnect" type="button">
+                <img src="./img/disconnect.svg" alt="사용 중지" />
+                <span>사용 중지</span>
+            </button>
+
+            <button id="upload" class="btn btn-upload" type="button">
+                <img src="./img/upload.svg" alt="파일 업로드" />
+                <span>파일 업로드</span>
+            </button>
+
+            <button id="show-tree" class="btn btn-download" type="button">
+                <img src="./img/download.svg" alt="파일 다운로드" />
+                <span>파일 다운로드</span>
+            </button>
+        </div>
+    </header>
+
+    <main>
+        <div class="start-page">
+            <img class="start-page-logo" src="./img/start-page-logo.svg" alt="logo">
+            <span class="warning">※ 주의 ※</span>
+            <span class="warning-text">본 서비스는 카카오톡의 공식 서비스가 아닌 비공식 웹버전입니다.<br>
+                현재 베타 단계로 운영 중이며, 보안이 완전히 검증되지 않아<br>
+                해킹등 보안 문제가 발생할 수 있어 사용을 권장드리지 않습니다.<br>
+                그럼에도 이용을 원하시는 경우, 아래 [시작하기] 버튼을 눌러주시기 바랍니다.</span>
+            <button id="show-iframe" class="start-btn">시작하기</button>
+        </div>
+    </main>
+
+    <!-- MODAL OVERLAY -->
+    <div id="modal-overlay" class="hidden"></div>
+
+    <!-- UPLOAD MODAL -->
+    <div id="upload-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="upload-title">
+        <header class="modal-header">
+            <h2 id="upload-title">파일 업로드</h2>
+            <button class="modal-close" data-target="#upload-modal">&times;</button>
+        </header>
+        <div class="modal-body">
+            <p>파일이 바탕화면(Desktop)으로 업로드 됩니다.</p>
+
+            <label for="file-input" class="dropzone" id="dropzone">
+                <input type="file" id="file-input" multiple hidden />
+                <div class="dropzone-text">
+                    파일을 클릭하거나 여기로 드래그 앤 드롭하세요
+                </div>
+            </label>
+
+            <ul id="selected-files" class="file-list"></ul>
+        </div>
+        <footer class="modal-footer">
+            <button id="do-upload" class="btn">업로드</button>
+            <button class="btn btn-disconnect modal-cancel" data-target="#upload-modal">취소</button>
+        </footer>
+    </div>
+
+    <!-- DOWNLOAD MODAL -->
+    <div id="download-modal" class="modal hidden" role="dialog" aria-modal="true" aria-labelledby="download-title">
+        <header class="modal-header">
+            <h2 id="download-title">파일 구조</h2>
+            <button class="modal-close" data-target="#download-modal">&times;</button>
+        </header>
+        <div class="modal-body">
+            <div id="tree-loading" class="small-muted">로딩 중...</div>
+            <div id="tree-container"></div>
+        </div>
+        <footer class="modal-footer">
+            <button id="refresh-tree" class="btn">새로고침</button>
+            <button class="btn btn-disconnect modal-cancel" data-target="#download-modal">닫기</button>
+        </footer>
+    </div>
+
+    <script src="//code.jquery.com/jquery-3.2.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/quercus.js@latest/src/treeview.js"></script>
+    <script src="./script.js"></script>
+</body>
+
+</html>
+

@@ -1,0 +1,28 @@
+{
+  "name": "kakaotalk-node-server",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "cookie-parser": "^1.4.7",
+    "exec": "^0.2.1",
+    "express": "^5.2.1",
+    "mime-types": "^3.0.2",
+    "multer": "^2.0.2",
+    "path": "^0.12.7"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://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@github.com/ai1023dev/kakaotalk-web.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ai1023dev/kakaotalk-web/issues"
+  },
+  "homepage": "https://github.com/ai1023dev/kakaotalk-web#readme"
+}

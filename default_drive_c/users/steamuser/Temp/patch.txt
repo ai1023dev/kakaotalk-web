@@ -1,0 +1,60 @@
+kakaotalk
+new
+25.11.0.4873
+old
+25.10.1.4840
+old~1
+25.10.0.4833
+old~2
+25.9.0.4790
+deployment_ratio
+0
+removed
+11
+skin\default\image\svgs\voiceroom\chat_icon_vroomon.svg
+skin\default\image\svgs\voiceroom\chat_list_icon_voice_en.svg
+skin\default\layout\GroupFaceTalkUserFeedbackDlg.xml
+skin\default\image\3.0\x1.5\vox_img_mos.png
+skin\default\image\3.0\x2.0\vox_img_mos.png
+skin\default\image\3.0\x1.25\vox_img_mos.png
+skin\default\layout\MoimBackupProgressWnd.xml
+skin\default\layout\drawer\DrawerMsgBox.xml
+skin\default\image\svgs\voiceroom\chat_list_icon_voice.svg
+skin\default\image\3.0\vox_img_mos.png
+skin\default\layout\GroupFaceTalkUserFeedbackSurveyView.xml
+removed~1
+11
+skin\default\image\svgs\voiceroom\chat_icon_vroomon.svg
+skin\default\image\svgs\voiceroom\chat_list_icon_voice_en.svg
+skin\default\layout\GroupFaceTalkUserFeedbackDlg.xml
+skin\default\image\3.0\x1.5\vox_img_mos.png
+skin\default\image\3.0\x2.0\vox_img_mos.png
+skin\default\image\3.0\x1.25\vox_img_mos.png
+skin\default\layout\MoimBackupProgressWnd.xml
+skin\default\layout\drawer\DrawerMsgBox.xml
+skin\default\image\svgs\voiceroom\chat_list_icon_voice.svg
+skin\default\image\3.0\vox_img_mos.png
+skin\default\layout\GroupFaceTalkUserFeedbackSurveyView.xml
+removed~2
+11
+skin\default\image\svgs\voiceroom\chat_icon_vroomon.svg
+skin\default\image\svgs\voiceroom\chat_list_icon_voice_en.svg
+skin\default\layout\GroupFaceTalkUserFeedbackDlg.xml
+skin\default\image\3.0\x1.5\vox_img_mos.png
+skin\default\image\3.0\x2.0\vox_img_mos.png
+skin\default\image\3.0\x1.25\vox_img_mos.png
+skin\default\layout\MoimBackupProgressWnd.xml
+skin\default\layout\drawer\DrawerMsgBox.xml
+skin\default\image\svgs\voiceroom\chat_list_icon_voice.svg
+skin\default\image\3.0\vox_img_mos.png
+skin\default\layout\GroupFaceTalkUserFeedbackSurveyView.xml
+kakaoupdate
+KakaoUpdate.exe 0 2812960 3087638065
+pak
+4
+kakaotalk_25.11.0.4873_full.pak 0 96639616 4275988873
+kakaotalk_25.10.1.4840_25.11.0.4873_diff.pak 1 52753397 1042417085
+kakaotalk_25.10.0.4833_25.11.0.4873_diff.pak 2 52753397 1042417085
+kakaotalk_25.9.0.4790_25.11.0.4873_diff.pak 3 52929008 375382195
+
+signature bBuZ9W3uyZjDeoWTkOEjYe2/ItTQWJce6X+9y1/DyZGnU7F3fbap3tpipKxLUPok2tSRkScQC/okmB0nWWNG6ifdPS1C/n1IgTyLZiSW7wcn4qBL+RJ01xEr/fW3O1FDHmsFRq7lT+Vw8cwsvZ1CihWwosdcVeidNekOYNdtf7k=

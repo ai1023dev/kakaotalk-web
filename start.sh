@@ -23,5 +23,6 @@ exec xpra start "$DISPLAY" \
   --daemon=no \
   --file-transfer=no \
   --open-files=no \
-  --printing=no
-
+  --printing=no \
+  --no-notifications \
+  --no-system-tray

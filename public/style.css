@@ -46,6 +46,14 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    opacity: 0.5;
+    transition: all 0.3s;
+}
+
+.header-right-no-click {
+    position: absolute;
+    width: 410px;
+    height: 84px;
 }
 
 /* 공통 버튼 스타일 (요청 반영된 색상) */
@@ -61,6 +69,7 @@ body {
     font-weight: 500;
     background-color: #391C1E;
     color: #FFE812;
+    transition: all 0.3s;
 }
 
 /* 버튼 내 아이콘 크기: 22px (요청) */
@@ -84,7 +93,7 @@ body {
 
 .btn-disconnect:hover {
     background-color: #5C5555;
-    color: #FFF06A;
+    color: #FFF34D;
 }
 
 
@@ -162,6 +171,10 @@ iframe {
     position: absolute;
     top: 0;
     left: 0;
+}
+
+.loading {
+    margin-bottom: 30px;
 }
 
 

@@ -21,9 +21,9 @@ app.use(cookieParser('fZ0rh0fg1h9a'))
 const nginx_sh_dir = '/home/kweb/Desktop/kakaotalk-web/'
 
 let session_list = [
-    { num: 1, active: false, user_ip: null, upload_volume: 0 },
-    { num: 2, active: false, user_ip: null, upload_volume: 0 },
-    { num: 3, active: false, user_ip: null, upload_volume: 0 }
+    { num: 1, active: false, user_ip: null, dead_line: null, upload_volume: 0 },
+    { num: 2, active: false, user_ip: null, dead_line: null, upload_volume: 0 },
+    { num: 3, active: false, user_ip: null, dead_line: null, upload_volume: 0 }
 ]
 
 // 라우트
@@ -43,6 +43,9 @@ app.get('/start_xpra', (req, res) => {
             can_use = session_list[i].num
             session_list[i].active = true
             session_list[i].user_ip = req.ip
+            const now = new Date();
+            const after30m = new Date(now.getTime() + 60 * 1000); //30 * 60 * 1000);
+            session_list[i].dead_line = after30m
             break;
         }
     }
@@ -54,16 +57,31 @@ app.get('/start_xpra', (req, res) => {
     const cmd_nginx = `sudo ${nginx_sh_dir}start_nginx.sh ${can_use} ${req.ip}`
     console.log(cmd_nginx)
     exec(cmd_nginx);
+
     console.log(session_list)
-
     res.send(can_use)
-
-    setTimeout(() => {
-        if (can_use === session_list[can_use - 1].num) {
-            stop_xpra(can_use)
-        }
-    }, 60 * 1000);
 });
+
+setInterval(() => {
+    console.log('검사')
+    const now = new Date();
+
+    for (let i = 0; i < session_list.length; i++) {
+        const session = session_list[i];
+
+        if (session.dead_line) {
+            if (now >= session.dead_line) {
+                console.log(`세션 ${session.num} 만료`);
+
+                stop_xpra(session.num);
+            }
+        }
+    }
+}, 30 * 1000);
+
+
+
+
 
 app.get('/stop_xpra', (req, res) => {
     for (let i = 0; i < session_list.length; i++) {
@@ -77,12 +95,15 @@ app.get('/stop_xpra', (req, res) => {
 });
 
 function stop_xpra(session) {
-    session_list[session - 1].active = false
     session_list[session - 1].user_ip = null
-
+    session_list[session - 1].dead_line = null
+    session_list[session - 1].upload_volume = 0
+    
     const cmd = `./stop.sh ${session}`
     console.log(cmd)
-    exec(cmd)
+    exec(cmd, (error, stdout, stderr) => {
+        session_list[session - 1].active = false
+    });
 
     const cmd_nginx = `sudo ${nginx_sh_dir}stop_nginx.sh ${session}`
     console.log(cmd_nginx)
@@ -125,7 +146,7 @@ const storage = multer.diskStorage({
                 break;
             }
         }
-        
+
         if (!session || !/^[a-zA-Z0-9_-]+$/.test(session)) {
             return cb(new Error('Invalid session'));
         }
@@ -226,7 +247,7 @@ app.get("/show_tree", (req, res) => {
             break;
         }
     }
-    
+
     if (!session || !/^[a-zA-Z0-9_-]+$/.test(session)) {
         return res.status(401).json({ error: 'Invalid session' });
     }

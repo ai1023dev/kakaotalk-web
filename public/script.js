@@ -44,10 +44,17 @@ function disconnect() {
     setTimeout(() => {
         $('iframe').remove();
     }, 300);
-}
 
-$('#disconnect').click(function () {
-    disconnect();
+    setTimeout(() => {
+        try {
+            $('.header-right').css('opacity', '0.5');
+            $('.header-right-no-click').css('z-index', '10000');
+            $('.start-page').css('z-index', '10000');
+            $('.start-page').css('opacity', '1');
+            $('iframe').remove();
+        } catch (error) { }
+    }, 5000);
+
     $.ajax({
         method: 'GET',
         url: '/stop_xpra',
@@ -56,6 +63,10 @@ $('#disconnect').click(function () {
             alert('서버 측 에러');
         }
     });
+}
+
+$('#disconnect').click(function () {
+    disconnect();
 });
 
 /* ------------------ 모달 공통 유틸 ------------------ */

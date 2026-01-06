@@ -47,13 +47,13 @@ body {
     align-items: center;
     gap: 10px;
     opacity: 0.5;
-    transition: all 0.3s;
 }
 
 .header-right-no-click {
     position: absolute;
     width: 410px;
     height: 84px;
+    transition: all 0.3s;
 }
 
 /* 공통 버튼 스타일 (요청 반영된 색상) */
@@ -146,7 +146,8 @@ main {
 .start-btn {
     width: 300px;
     height: 66px;
-    background-color: #FFE812;   /* 카카오 옐로우 */
+    background-color: #FFE812;
+    /* 카카오 옐로우 */
     color: #391C1E;
     font-size: 24px;
     font-weight: 600;
@@ -187,13 +188,14 @@ iframe {
 #modal-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(0,0,0,0.6);
+    background: rgba(0, 0, 0, 0.6);
     z-index: 20000;
     display: block;
     opacity: 0;
     transition: opacity 0.2s ease;
     pointer-events: none;
 }
+
 #modal-overlay.show {
     opacity: 1;
     pointer-events: auto;
@@ -210,13 +212,14 @@ iframe {
     max-width: calc(100% - 40px);
     background: #fff;
     border-radius: 12px;
-    box-shadow: 0 10px 40px rgba(0,0,0,0.35);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
     display: flex;
     flex-direction: column;
     transition: transform 0.18s ease, opacity 0.18s ease;
     opacity: 0;
     pointer-events: none;
 }
+
 .modal.show {
     opacity: 1;
     transform: translate(-50%, -50%) scale(1);
@@ -224,16 +227,18 @@ iframe {
 }
 
 .modal-header {
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 16px 20px;
     border-bottom: 1px solid #eee;
 }
+
 .modal-header h2 {
-    margin:0;
-    font-size:18px;
+    margin: 0;
+    font-size: 18px;
 }
+
 .modal-close {
     background: transparent;
     border: none;
@@ -261,16 +266,18 @@ iframe {
     border: 2px dashed #d6d6d6;
     border-radius: 8px;
     padding: 26px;
-    text-align:center;
+    text-align: center;
     cursor: pointer;
     margin: 12px 0;
     transition: background 0.12s ease, border-color 0.12s ease;
     user-select: none;
 }
+
 .dropzone .dropzone-text {
     color: #666;
     font-size: 14px;
 }
+
 .dropzone.dragover {
     background: #f7f7f9;
     border-color: #999;
@@ -286,26 +293,36 @@ iframe {
     max-height: 160px;
     overflow: auto;
 }
+
 .file-list li {
     padding: 6px 8px;
     border-radius: 6px;
     background: #fafafa;
     margin-bottom: 6px;
     font-size: 13px;
-    display:flex;
-    justify-content:space-between;
+    display: flex;
+    justify-content: space-between;
     gap: 8px;
 }
-.small-muted { color: #888; font-size: 13px; margin-bottom: 8px; }
+
+.small-muted {
+    color: #888;
+    font-size: 13px;
+    margin-bottom: 8px;
+}
 
 /* tree-container 스타일 */
 #tree-container {
     min-height: 120px;
 }
-.hidden { display: none !important; }
+
+.hidden {
+    display: none !important;
+}
 
 
-ul, ol {
+ul,
+ol {
     list-style: none;
 }
 
@@ -319,4 +336,71 @@ li {
 
 .treeview-expander {
     display: none
+}
+
+
+
+
+
+.ad {
+    position: fixed;
+    background-color: #eeeeee;
+    width: calc(20vw - 32px);
+    height: calc(50vh - 58px);
+    border-radius: 10px;
+}
+
+.ad1 {
+    top: 84px;
+    left: 16px;
+}
+
+.ad2 {
+    bottom: 16px;
+    left: 16px;
+}
+
+.ad3 {
+    top: 84px;
+    right: 16px;
+    height: 140px !important;
+    display: flex;
+    justify-content: center;
+}
+
+.ad4 {
+    bottom: 16px;
+    right: 16px;
+    height: calc(100vh - 256px) !important;
+}
+
+
+.timer-wrap {
+    margin-top: 32px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;       /* 가로 중앙 */
+}
+
+.timer-alert {
+    margin-bottom: 14px;
+    color: #555;
+    text-align: center;
+}
+
+.timer {
+    display: flex;
+    align-items: center;       /* 아이콘 + 시간 세로 중앙 */
+    gap: 16px;
+}
+
+.clock-icon {
+    width: 34px;
+    height: 34px;
+}
+
+#time {
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 2px;
 }

@@ -2,36 +2,77 @@ let session_num;
 
 // 기존 시작하기 버튼 로직 유지
 $(document).on('click', '#show-iframe', function () {
+    $('.header-right').css('opacity', '1');
+    $('.header-right-no-click').css('z-index', '-100');
+    $('.start-page > *:not(.loading)').css('opacity', '0');
+    setTimeout(() => {
+        $('.start-page').html('<img class="loading" src="./img/loading.gif" style="display:none"/><span class="warning">페이지 로딩 후 카카오톡 창이 표시될 때까지 잠시 기다려 주세요</span>');
+        $('.loading').fadeIn(300);
+    }, 300);
     $.ajax({
         method: 'GET',
         url: '/start_xpra',
-        success: function (data) {
-            if (data === 'already') {
-                alert('이미 세션을 사용중입니다.')
-            } else {
-                $('.header-right').css('opacity', '1');
-                $('.header-right-no-click').css('z-index', '-100');
-                $('.start-page > *:not(.loading)').css('opacity', '0');
+        success: function (data) {console.log(data)
+            timer(data.dead_line)
+            session_num = data.num;
+            setTimeout(function () {
+                $('main').append(`<iframe src="https://kweb${session_num}.siliod.com/?floating_menu=0" frameborder="0"></iframe>`);
+            }, 4000);
+            setTimeout(function () {
+                $('.start-page').css('opacity', 0);
                 setTimeout(() => {
-                    $('.start-page').html('<img class="loading" src="./img/loading.gif" style="display:none"/><span class="warning">페이지 로딩 후 카카오톡 창이 표시될 때까지 잠시 기다려 주세요</span>');
-                    $('.loading').fadeIn(300);
+                    $('.start-page').css('z-index', '-100');
                 }, 300);
+            }, 6000);
 
-                session_num = data;
-                setTimeout(function () {
-                    $('main').append(`<iframe src="/${session_num}?floating_menu=0" frameborder="0"></iframe>`);
-                    $('.start-page').css('opacity', 0);
-                    setTimeout(() => {
-                        $('.start-page').css('z-index', '-100');
-                    }, 300);
-                }, 5000);
-            }
         },
         error: function (xhr, status, error) {
             alert('서버 측 에러');
         }
     });
 });
+
+let timer_interval
+function timer(dead_line) {
+    let totalSeconds;
+
+    // 1️⃣ deadline이 없으면 30분
+    if (!dead_line) {
+        totalSeconds = 30 * 60;
+    } 
+    // 2️⃣ deadline이 있으면 현재 시간 ~ 종료 시간 차이
+    else {
+        const endTime = new Date(dead_line).getTime();
+        const nowTime = Date.now();
+
+        totalSeconds = Math.floor((endTime - nowTime) / 1000);
+
+        // 이미 지난 시간이면 0 처리
+        if (totalSeconds < 0) totalSeconds = 0;
+    }
+
+    function updateTimer() {
+        let minutes = Math.floor(totalSeconds / 60);
+        let seconds = totalSeconds % 60;
+
+        minutes = String(minutes).padStart(2, '0');
+        seconds = String(seconds).padStart(2, '0');
+
+        $('#time').text(`${minutes}:${seconds}`);
+
+        if (totalSeconds > 0) {
+            totalSeconds--;
+        } else {
+            clearInterval(timer_interval);
+            disconnect()
+        }
+    }
+
+    updateTimer(); // 초기 표시
+    timer_interval = setInterval(updateTimer, 1000);
+}
+
+
 
 // disconnect 기존 로직
 const startPageOriginalHTML = '<div class="start-page"><img class="start-page-logo" src="./img/start-page-logo.svg" alt="logo"><span class="warning">※ 주의 ※</span><span class="warning-text">본 서비스는 카카오톡의 공식 서비스가 아닌 비공식 웹버전입니다.<br>현재 베타 단계로 운영 중이며, 보안이 완전히 검증되지 않아<br>해킹등 보안 문제가 발생할 수 있어 사용을 권장드리지 않습니다.<br>그럼에도 이용을 원하시는 경우, 아래 [시작하기] 버튼을 눌러주시기 바랍니다.</span><button id="show-iframe" class="start-btn">시작하기</button></div>';
@@ -41,19 +82,7 @@ function disconnect() {
     $('.start-page').html(startPageOriginalHTML);
     $('.start-page').css('z-index', '10000');
     $('.start-page').css('opacity', '1');
-    setTimeout(() => {
-        $('iframe').remove();
-    }, 300);
-
-    setTimeout(() => {
-        try {
-            $('.header-right').css('opacity', '0.5');
-            $('.header-right-no-click').css('z-index', '10000');
-            $('.start-page').css('z-index', '10000');
-            $('.start-page').css('opacity', '1');
-            $('iframe').remove();
-        } catch (error) { }
-    }, 5000);
+    $('iframe').remove();
 
     $.ajax({
         method: 'GET',
@@ -67,6 +96,8 @@ function disconnect() {
 
 $('#disconnect').click(function () {
     disconnect();
+    clearInterval(timer_interval);
+    $('#time').text('30:00');
 });
 
 /* ------------------ 모달 공통 유틸 ------------------ */

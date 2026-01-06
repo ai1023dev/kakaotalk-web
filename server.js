@@ -31,7 +31,7 @@ let session_list = [
 app.get('/start_xpra', (req, res) => {
     for (let i = 0; i < session_list.length; i++) {
         if (session_list[i].user_ip === req.ip) {
-            res.send('already');
+            res.send({num: session_list[i].num, dead_line: session_list[i].dead_line});
             return;
         }
     }
@@ -44,7 +44,7 @@ app.get('/start_xpra', (req, res) => {
             session_list[i].active = true
             session_list[i].user_ip = req.ip
             const now = new Date();
-            const after30m = new Date(now.getTime() + 60 * 1000); //30 * 60 * 1000);
+            const after30m = new Date(now.getTime() + 30 * 60 * 1000);
             session_list[i].dead_line = after30m
             break;
         }
@@ -59,7 +59,7 @@ app.get('/start_xpra', (req, res) => {
     exec(cmd_nginx);
 
     console.log(session_list)
-    res.send(can_use)
+    res.send({num: can_use, dead_line: false})
 });
 
 setInterval(() => {

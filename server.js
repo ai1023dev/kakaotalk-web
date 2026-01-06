@@ -6,9 +6,15 @@ const cookieParser = require('cookie-parser')
 const { exec } = require('child_process');
 const multer = require('multer');
 const mime = require('mime-types');
+const dotenv = require("dotenv");
+dotenv.config();
 
 // 포트 8080
 const PORT = 8080;
+
+const CF_API_TOKEN = process.env.CF_API_TOKEN;
+const CF_ZONE_ID = process.env.CF_ZONE_ID;
+const CF_API_BASE = "https://api.cloudflare.com/client/v4";
 
 // 미들웨어
 app.use(express.json());
@@ -18,12 +24,10 @@ app.set('trust proxy', true);
 app.use(cookieParser('fZ0rh0fg1h9a'))
 
 
-const nginx_sh_dir = '/home/kweb/Desktop/kakaotalk-web/'
-
 let session_list = [
-    { num: 1, active: false, user_ip: null, dead_line: null, upload_volume: 0 },
-    { num: 2, active: false, user_ip: null, dead_line: null, upload_volume: 0 },
-    { num: 3, active: false, user_ip: null, dead_line: null, upload_volume: 0 }
+    { num: 1, active: false, user_ip: null, dead_line: null, upload_volume: 0, cf_ip_rule_id: null },
+    { num: 2, active: false, user_ip: null, dead_line: null, upload_volume: 0, cf_ip_rule_id: null },
+    { num: 3, active: false, user_ip: null, dead_line: null, upload_volume: 0, cf_ip_rule_id: null }
 ]
 
 // 라우트
@@ -31,7 +35,7 @@ let session_list = [
 app.get('/start_xpra', (req, res) => {
     for (let i = 0; i < session_list.length; i++) {
         if (session_list[i].user_ip === req.ip) {
-            res.send({num: session_list[i].num, dead_line: session_list[i].dead_line});
+            res.send({ num: session_list[i].num, dead_line: session_list[i].dead_line });
             return;
         }
     }
@@ -54,33 +58,11 @@ app.get('/start_xpra', (req, res) => {
     console.log(cmd)
     exec(cmd);
 
-    const cmd_nginx = `sudo ${nginx_sh_dir}start_nginx.sh ${can_use} ${req.ip}`
-    console.log(cmd_nginx)
-    exec(cmd_nginx);
+    allow_ip_rules(req.ip, can_use);
 
     console.log(session_list)
-    res.send({num: can_use, dead_line: false})
+    res.send({ num: can_use, dead_line: false })
 });
-
-setInterval(() => {
-    console.log('검사')
-    const now = new Date();
-
-    for (let i = 0; i < session_list.length; i++) {
-        const session = session_list[i];
-
-        if (session.dead_line) {
-            if (now >= session.dead_line) {
-                console.log(`세션 ${session.num} 만료`);
-
-                stop_xpra(session.num);
-            }
-        }
-    }
-}, 30 * 1000);
-
-
-
 
 
 app.get('/stop_xpra', (req, res) => {
@@ -98,19 +80,117 @@ function stop_xpra(session) {
     session_list[session - 1].user_ip = null
     session_list[session - 1].dead_line = null
     session_list[session - 1].upload_volume = 0
-    
+
     const cmd = `./stop.sh ${session}`
     console.log(cmd)
     exec(cmd, (error, stdout, stderr) => {
         session_list[session - 1].active = false
     });
 
-    const cmd_nginx = `sudo ${nginx_sh_dir}stop_nginx.sh ${session}`
-    console.log(cmd_nginx)
-    exec(cmd_nginx);
+    disallow_ip_rules(session)
 
     console.log(session_list)
 }
+
+
+
+const cf_headers = {
+    "Authorization": `Bearer ${CF_API_TOKEN}`,
+    "Content-Type": "application/json"
+};
+
+async function allow_ip_rules(ip, session) {
+    const delete_res = await fetch(
+        `${CF_API_BASE}/zones/${CF_ZONE_ID}/firewall/rules/${session_list[session].cf_ip_rule_id}`,
+        {
+            method: "DELETE",
+            headers: cf_headers
+        }
+    );
+
+    const rules = [
+        {
+            action: "block",
+            description: `block others for kweb${session}`,
+            filter: {
+                expression:
+                    `(http.host eq "kweb${session}.siliod.com" and not ip.src eq ${ip})`
+            }
+        }
+    ];
+
+    const allow_res = await fetch(
+        `${CF_API_BASE}/zones/${CF_ZONE_ID}/firewall/rules`,
+        {
+            method: "POST",
+            headers: cf_headers,
+            body: JSON.stringify(rules)
+        }
+    );
+
+    const delete_json = await delete_res.json();
+    const allow_json = await allow_res.json();
+    session_list[session].cf_ip_rule_id = allow_json.result[0].id;
+    console.log(JSON.stringify(delete_json, null, 2));
+    console.log(JSON.stringify(allow_json, null, 2));
+}
+
+async function disallow_ip_rules(session) {
+    const delete_res = await fetch(
+        `${CF_API_BASE}/zones/${CF_ZONE_ID}/firewall/rules/${session_list[session].cf_ip_rule_id}`,
+        {
+            method: "DELETE",
+            headers: cf_headers
+        }
+    );
+
+    const rules = [
+        {
+            action: "block",
+            description: `block all for kweb${session}`,
+            filter: {
+                expression:
+                    `(http.host eq "kweb${session}.siliod.com")`
+            }
+        }
+    ];
+
+    const block_res = await fetch(
+        `${CF_API_BASE}/zones/${CF_ZONE_ID}/firewall/rules`,
+        {
+            method: "POST",
+            headers: cf_headers,
+            body: JSON.stringify(rules)
+        }
+    );
+
+    const delete_json = await delete_res.json();
+    const block_json = await block_res.json();
+    session_list[session].cf_ip_rule_id = block_json.result[0].id;
+    console.log(JSON.stringify(delete_json, null, 2));
+    console.log(JSON.stringify(block_json, null, 2));
+}
+
+
+
+
+
+setInterval(() => {
+    console.log('검사')
+    const now = new Date();
+
+    for (let i = 0; i < session_list.length; i++) {
+        const session = session_list[i];
+
+        if (session.dead_line) {
+            if (now >= session.dead_line) {
+                console.log(`세션 ${session.num} 만료`);
+
+                stop_xpra(session.num);
+            }
+        }
+    }
+}, 30 * 1000);
 
 
 

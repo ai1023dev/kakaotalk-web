@@ -44,7 +44,7 @@ Xpra, Bottles 등을 활용하여 로컬 앱 환경과 비슷하게 동작하도
 
 ### CloudFlare 터널 & Nginx
 ##### 8080 포트 메인 서버 -> 메인 도메인(kakaotalk-web.siliod.com 사실 서브 도메인)으로 터널링
-##### 14401~14410 xpra 서버 -> Nginx(IP 차단용) -> 서브 도메인(kweb${1~10}.siliod.com)으로 터널링 (iframe kakaotalk-web.siliod.com에서 허용)
+##### 14401-14410 xpra 서버 -> Nginx(IP 차단용) -> 서브 도메인(kweb${1-10}.siliod.com)으로 터널링 (iframe kakaotalk-web.siliod.com에서 허용)
 
 ### Nginx conf 파일
 server {

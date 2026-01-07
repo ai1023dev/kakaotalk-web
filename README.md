@@ -14,7 +14,7 @@ Xpra, Bottles 등을 활용하여 로컬 앱 환경과 비슷하게 동작하도
 
 한계:
 - 개발자가 보안에는 젬병이라 IP 기반 세션 관리, Bottles 권한제한 등의 노력을 했으나 미처 생각 못한 취약점 존재할 가능성 높음
-- 가정집 실사용 컴퓨터로 구동중이라 서버 불안정 및 해킹위험 높음
+- 가정집 실사용 컴퓨터로 구동중이라 서버 불안정 및 해킹 위험 높음
 - 한글 키보드 입력 안됨
 - 카카오 사측 허락 안받음
 
@@ -42,7 +42,11 @@ Xpra, Bottles 등을 활용하여 로컬 앱 환경과 비슷하게 동작하도
 
 ## 개발 폴더 외 설정
 
-### nginx
+### CloudFlare 터널 & Nginx
+##### 8080 포트 메인 서버 -> 메인 도메인(kakaotalk-web.siliod.com 사실 서브 도메인)으로 터널링
+##### 14401~14410 xpra 서버 -> Nginx(IP 차단용) -> 서브 도메인(kweb${1~10}.siliod.com)으로 터널링 (iframe kakaotalk-web.siliod.com에서 허용용)
+
+### Nginx conf 파일
 server {
     listen 14501;
     server_name _;
@@ -66,7 +70,7 @@ server {
 
 1~10 까지 다 적기
 
-### visudo
+### Visudo (sudo 비번 프리 패싱)
 kweb ALL=(root) NOPASSWD: /home/kweb/Desktop/kakaotalk-web/start_nginx.sh
 kweb ALL=(root) NOPASSWD: /home/kweb/Desktop/kakaotalk-web/stop_nginx.sh
 

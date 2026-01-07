@@ -10,7 +10,7 @@ if [ "$IDX" -lt 1 ] || [ "$IDX" -gt 10 ]; then
 fi
 
 DISPLAY=":$IDX"
-PORT=$((14500 + IDX))
+PORT=$((14400 + IDX))
 BOTTLE="kweb-$IDX"
 
 # ===== Xpra 실행 =====

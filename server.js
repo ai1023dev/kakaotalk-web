@@ -12,9 +12,6 @@ dotenv.config();
 // 포트 8080
 const PORT = 8080;
 
-const CF_API_TOKEN = process.env.CF_API_TOKEN;
-const CF_ZONE_ID = process.env.CF_ZONE_ID;
-const CF_API_BASE = "https://api.cloudflare.com/client/v4";
 
 // 미들웨어
 app.use(express.json());
@@ -23,11 +20,12 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.set('trust proxy', true);
 app.use(cookieParser('fZ0rh0fg1h9a'))
 
+const nginx_sh_dir = '/home/kweb/Desktop/kakaotalk-web/'
 
 let session_list = [
-    { num: 1, active: false, user_ip: null, dead_line: null, upload_volume: 0, cf_ip_rule_id: null },
-    { num: 2, active: false, user_ip: null, dead_line: null, upload_volume: 0, cf_ip_rule_id: null },
-    { num: 3, active: false, user_ip: null, dead_line: null, upload_volume: 0, cf_ip_rule_id: null }
+    { num: 1, active: false, user_ip: null, dead_line: null, upload_volume: 0 },
+    { num: 2, active: false, user_ip: null, dead_line: null, upload_volume: 0 },
+    { num: 3, active: false, user_ip: null, dead_line: null, upload_volume: 0 }
 ]
 
 // 라우트
@@ -58,7 +56,9 @@ app.get('/start_xpra', (req, res) => {
     console.log(cmd)
     exec(cmd);
 
-    allow_ip_rules(req.ip, can_use);
+    const cmd_nginx = `sudo ${nginx_sh_dir}start_nginx.sh ${can_use} ${req.ip}`
+    console.log(cmd_nginx)
+    exec(cmd_nginx);
 
     console.log(session_list)
     res.send({ num: can_use, dead_line: false })
@@ -87,90 +87,12 @@ function stop_xpra(session) {
         session_list[session - 1].active = false
     });
 
-    disallow_ip_rules(session)
+    const cmd_nginx = `sudo ${nginx_sh_dir}stop_nginx.sh ${session}`
+    console.log(cmd_nginx)
+    exec(cmd_nginx);
 
     console.log(session_list)
 }
-
-
-
-const cf_headers = {
-    "Authorization": `Bearer ${CF_API_TOKEN}`,
-    "Content-Type": "application/json"
-};
-
-async function allow_ip_rules(ip, session) {
-    const delete_res = await fetch(
-        `${CF_API_BASE}/zones/${CF_ZONE_ID}/firewall/rules/${session_list[session].cf_ip_rule_id}`,
-        {
-            method: "DELETE",
-            headers: cf_headers
-        }
-    );
-
-    const rules = [
-        {
-            action: "block",
-            description: `block others for kweb${session}`,
-            filter: {
-                expression:
-                    `(http.host eq "kweb${session}.siliod.com" and not ip.src eq ${ip})`
-            }
-        }
-    ];
-
-    const allow_res = await fetch(
-        `${CF_API_BASE}/zones/${CF_ZONE_ID}/firewall/rules`,
-        {
-            method: "POST",
-            headers: cf_headers,
-            body: JSON.stringify(rules)
-        }
-    );
-
-    const delete_json = await delete_res.json();
-    const allow_json = await allow_res.json();
-    session_list[session].cf_ip_rule_id = allow_json.result[0].id;
-    console.log(JSON.stringify(delete_json, null, 2));
-    console.log(JSON.stringify(allow_json, null, 2));
-}
-
-async function disallow_ip_rules(session) {
-    const delete_res = await fetch(
-        `${CF_API_BASE}/zones/${CF_ZONE_ID}/firewall/rules/${session_list[session].cf_ip_rule_id}`,
-        {
-            method: "DELETE",
-            headers: cf_headers
-        }
-    );
-
-    const rules = [
-        {
-            action: "block",
-            description: `block all for kweb${session}`,
-            filter: {
-                expression:
-                    `(http.host eq "kweb${session}.siliod.com")`
-            }
-        }
-    ];
-
-    const block_res = await fetch(
-        `${CF_API_BASE}/zones/${CF_ZONE_ID}/firewall/rules`,
-        {
-            method: "POST",
-            headers: cf_headers,
-            body: JSON.stringify(rules)
-        }
-    );
-
-    const delete_json = await delete_res.json();
-    const block_json = await block_res.json();
-    session_list[session].cf_ip_rule_id = block_json.result[0].id;
-    console.log(JSON.stringify(delete_json, null, 2));
-    console.log(JSON.stringify(block_json, null, 2));
-}
-
 
 
 

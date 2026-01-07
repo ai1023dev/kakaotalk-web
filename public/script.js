@@ -216,12 +216,18 @@ $('#do-upload').on('click', function () {
         data: formData,
         processData: false,
         contentType: false,
-        success: res => {
-            alert('업로드 완료');
+        success: function (data) {
+            console.log(data)
+            if (data === 'ok') {
+                alert('업로드 완료');
+            }
+            if (data === 'max') {
+                alert('한 세션당 500M 까지 업로드 가능합니다.');
+            }
             hideModal('#upload-modal');
         },
         error: err => {
-            alert(err.responseJSON?.message || '업로드 실패');
+            alert('한번에 20개가 초과되는 업로드나 100M가 넘는 업로드는 불가능 합니다.');
         }
     });
 });

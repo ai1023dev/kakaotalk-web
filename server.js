@@ -138,75 +138,14 @@ const ALLOWED_EXT = new Set([
 ]);
 
 const SHARE_DIR = '/home/kweb/.var/app/com.usebottles.bottles/data/bottles/bottles';
+const max_volume = 500 * 1024 * 1024; // 500MB
 
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        let session
-        for (let i = 0; i < session_list.length; i++) {
-            if (session_list[i].user_ip === req.ip) {
-                session = session_list[i].num
-                break;
-            }
-        }
-
-        if (!session || !/^[a-zA-Z0-9_-]+$/.test(session)) {
-            return cb(new Error('Invalid session'));
-        }
-
-        const dir = path.join(
-            SHARE_DIR,
-            `kweb-${session}`,
-            'drive_c/users/steamuser/Desktop'
-        );
-
-        if (!fs.existsSync(dir)) {
-            return cb(new Error('Target directory does not exist'));
-        }
-
-        cb(null, dir);
-    },
-
-    filename: (req, file, cb) => {
-        const originalName = Buffer
-            .from(file.originalname, 'latin1')
-            .toString('utf8');
-
-        const ext = path.extname(originalName);
-        const base = path.basename(originalName, ext);
-
-        let session
-        for (let i = 0; i < session_list.length; i++) {
-            if (session_list[i].user_ip === req.ip) {
-                session = session_list[i].num
-                break;
-            }
-        }
-
-        const dir = path.join(
-            SHARE_DIR,
-            `kweb-${session}`,
-            'drive_c/users/steamuser/Desktop'
-        );
-
-        let filename = originalName;
-        let counter = 1;
-
-        while (fs.existsSync(path.join(dir, filename))) {
-            filename = `${base}(${counter})${ext}`;
-            counter++;
-        }
-
-        cb(null, filename);
-    }
-});
-
+// 메모리 저장
+const storage = multer.memoryStorage();
 const upload = multer({
     storage,
     fileFilter: (req, file, cb) => {
-        const ext = path.extname(file.originalname)
-            .toLowerCase()
-            .replace('.', '');
-
+        const ext = path.extname(file.originalname).toLowerCase().replace('.', '');
         if (!ALLOWED_EXT.has(ext)) {
             return cb(new Error('허용되지 않은 파일 확장자'));
         }
@@ -214,10 +153,62 @@ const upload = multer({
     }
 });
 
-/* ===== 업로드 API ===== */
+// 업로드 API
 app.post('/upload', upload.array('files', 20), (req, res) => {
-    res.send(true);
+    try {
+        let sessionObj = session_list.find(s => s.user_ip === req.ip);
+        if (!sessionObj) return res.status(400).send('Invalid session');
+
+        let totalUpload = req.files.reduce((acc, file) => acc + file.size, 0);
+
+        // 누적 용량 초과 체크
+        if (sessionObj.upload_volume + totalUpload > max_volume) {
+            return res.send('max');
+        }
+
+        // 저장 처리
+        req.files.forEach(file => {
+            // 세션 디렉토리
+            const dir = path.join(
+                SHARE_DIR,
+                `kweb-${sessionObj.num}`,
+                'drive_c/users/steamuser/Desktop'
+            );
+
+            // 디렉토리 없으면 생성
+            if (!fs.existsSync(dir)) {
+                fs.mkdirSync(dir, { recursive: true });
+            }
+
+            // 파일 이름 충돌 처리
+            const ext = path.extname(file.originalname);
+            const base = path.basename(file.originalname, ext);
+
+            let filename = Buffer.from(file.originalname, 'latin1').toString('utf8');
+            let counter = 1;
+
+            while (fs.existsSync(path.join(dir, filename))) {
+                filename = `${base}(${counter})${ext}`;
+                counter++;
+            }
+
+            // 디스크에 쓰기
+            fs.writeFileSync(path.join(dir, filename), file.buffer);
+        });
+
+        // 누적 용량 증가
+        sessionObj.upload_volume += totalUpload;
+
+        res.send('ok');
+    } catch (err) {
+        console.error(err);
+        res.status(500).send('upload error');
+    }
 });
+
+
+
+
 
 /* ===== 파일 트리 ===== */
 function buildTree(dir, relative = "") {

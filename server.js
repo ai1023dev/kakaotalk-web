@@ -2,35 +2,91 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const fs = require('fs');
-const cookieParser = require('cookie-parser')
 const { exec } = require('child_process');
 const multer = require('multer');
 const mime = require('mime-types');
+const helmet = require('helmet');
 const dotenv = require("dotenv");
+const zlib = require('zlib');
 dotenv.config();
 
-// 포트 8080
-const PORT = 8080;
+app.use(helmet({
+    contentSecurityPolicy: {
+        useDefaults: false,
+        directives: {
+            "default-src": ["'self'"],
 
+            "script-src": [
+                "'self'",
+                "https://code.jquery.com",
+                "https://cdn.jsdelivr.net"
+            ],
+
+            "connect-src": ["'self'"],
+
+            "frame-src": [
+                "https://kweb1.siliod.com",
+                "https://kweb2.siliod.com",
+                "https://kweb3.siliod.com",
+                "https://kweb4.siliod.com",
+                "https://kweb5.siliod.com",
+                "https://kweb6.siliod.com",
+                "https://kweb7.siliod.com",
+                "https://kweb8.siliod.com",
+                "https://kweb9.siliod.com",
+                "https://kweb10.siliod.com"
+            ],
+
+            "style-src": [
+                "'self'",
+                "https://cdn.jsdelivr.net"
+            ],
+
+            "font-src": [
+                "'self'",
+                "https://cdn.jsdelivr.net",
+                "data:"
+            ],
+
+            "img-src": ["'self'"]
+        }
+    }
+}));
 
 // 미들웨어
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('trust proxy', true);
-app.use(cookieParser('fZ0rh0fg1h9a'))
+
+
+//////////////////// 기본 세팅 값 //////////////////////
+
+const PORT = 8080;
 
 const nginx_sh_dir = '/home/kweb/Desktop/kakaotalk-web/'
 
 let session_list = [
     { num: 1, active: false, user_ip: null, dead_line: null, upload_volume: 0 },
     { num: 2, active: false, user_ip: null, dead_line: null, upload_volume: 0 },
-    { num: 3, active: false, user_ip: null, dead_line: null, upload_volume: 0 }
+    { num: 3, active: false, user_ip: null, dead_line: null, upload_volume: 0 },
+    { num: 4, active: false, user_ip: null, dead_line: null, upload_volume: 0 },
+    { num: 5, active: false, user_ip: null, dead_line: null, upload_volume: 0 },
+    { num: 6, active: false, user_ip: null, dead_line: null, upload_volume: 0 },
+    { num: 7, active: false, user_ip: null, dead_line: null, upload_volume: 0 },
+    { num: 8, active: false, user_ip: null, dead_line: null, upload_volume: 0 },
+    { num: 9, active: false, user_ip: null, dead_line: null, upload_volume: 0 },
+    { num: 10, active: false, user_ip: null, dead_line: null, upload_volume: 0 }
 ]
 
-// 라우트
+////////////////////////////////////////////////////////
+
+
+
+
 
 app.get('/start_xpra', (req, res) => {
+    // 이미 같은 IP로 실행중인 세션이 있으면 그 세션 주고 리턴
     for (let i = 0; i < session_list.length; i++) {
         if (session_list[i].user_ip === req.ip) {
             res.send({ num: session_list[i].num, dead_line: session_list[i].dead_line });
@@ -38,11 +94,11 @@ app.get('/start_xpra', (req, res) => {
         }
     }
 
-    let can_use
-
+    let session
+    // 꺼진 세션이 있는지 찾고 찾으면 " 켜짐 표시, IP, 타이머 " 설정
     for (let i = 0; i < session_list.length; i++) {
         if (!session_list[i].active) {
-            can_use = session_list[i].num
+            session = session_list[i].num
             session_list[i].active = true
             session_list[i].user_ip = req.ip
             const now = new Date();
@@ -52,20 +108,23 @@ app.get('/start_xpra', (req, res) => {
         }
     }
 
-    const cmd = `./start.sh ${can_use} &`
+    // Xpra 실행
+    const cmd = `./start.sh ${session} &`
     console.log(cmd)
     exec(cmd);
 
-    const cmd_nginx = `sudo ${nginx_sh_dir}start_nginx.sh ${can_use} ${req.ip}`
+    // Nginx로 req.ip만 접속 가능하게 설정
+    const cmd_nginx = `sudo ${nginx_sh_dir}start_nginx.sh ${session} ${req.ip}`
     console.log(cmd_nginx)
     exec(cmd_nginx);
 
     console.log(session_list)
-    res.send({ num: can_use, dead_line: false })
+    res.send({ num: session, dead_line: false })
 });
 
 
 app.get('/stop_xpra', (req, res) => {
+    // 유저의 IP로 등록되어 실행중인 세션을 찾아 stop_xpra()
     for (let i = 0; i < session_list.length; i++) {
         if (session_list[i].user_ip === req.ip) {
             stop_xpra(session_list[i].num)
@@ -77,16 +136,20 @@ app.get('/stop_xpra', (req, res) => {
 });
 
 function stop_xpra(session) {
+    // IP, 타이머, 업로드 누적용량 초기화
     session_list[session - 1].user_ip = null
     session_list[session - 1].dead_line = null
     session_list[session - 1].upload_volume = 0
 
+    // Xpra 끄기
     const cmd = `./stop.sh ${session}`
     console.log(cmd)
     exec(cmd, (error, stdout, stderr) => {
+        // 혹시 모르니 비활성화는 모든 작업 끝난후
         session_list[session - 1].active = false
     });
 
+    // 접근 허용 가능 IP 없애기
     const cmd_nginx = `sudo ${nginx_sh_dir}stop_nginx.sh ${session}`
     console.log(cmd_nginx)
     exec(cmd_nginx);
@@ -94,11 +157,8 @@ function stop_xpra(session) {
     console.log(session_list)
 }
 
-
-
-
+// 30초 마다 30분의 이용시간 타이머가 지난 세션을 검사후 종료
 setInterval(() => {
-    console.log('검사')
     const now = new Date();
 
     for (let i = 0; i < session_list.length; i++) {
@@ -115,6 +175,18 @@ setInterval(() => {
 }, 30 * 1000);
 
 
+
+
+// 안타깝게도 아래 파일 업/다운로드 코드는 GPT가 다짜서 잘모르겠으나
+// const SHARE_DIR = '/home/kweb/.var/app/com.usebottles.bottles/data/bottles/bottles';
+//const dir = path.join(
+//     SHARE_DIR,
+//     `kweb-${sessionObj.num}`,
+//     'drive_c/users/steamuser/Desktop'
+// );
+// 이 경로를 공유 폴더처럼 이용해 파일을 웹 클라이언트와 서버간 공유한다. 는게 메인 아이디어다.
+
+// app.get("/show_tree"... 요청시 ...drive_c/users/steamuser/ 경로 아래 파일구조를 보내주는거 말고는 지극히 평범한 파일 업/다운로드 코드
 
 
 /* ===== 허용 확장자 ===== */
@@ -153,7 +225,7 @@ const upload = multer({
     }
 });
 
-// 업로드 API
+// 업로드 API (업로드 저장 후 .gz 복사본 생성)
 app.post('/upload', upload.array('files', 20), (req, res) => {
     try {
         let sessionObj = session_list.find(s => s.user_ip === req.ip);
@@ -175,11 +247,6 @@ app.post('/upload', upload.array('files', 20), (req, res) => {
                 'drive_c/users/steamuser/Desktop'
             );
 
-            // 디렉토리 없으면 생성
-            if (!fs.existsSync(dir)) {
-                fs.mkdirSync(dir, { recursive: true });
-            }
-
             // 파일 이름 충돌 처리
             const ext = path.extname(file.originalname);
             const base = path.basename(file.originalname, ext);
@@ -192,8 +259,10 @@ app.post('/upload', upload.array('files', 20), (req, res) => {
                 counter++;
             }
 
-            // 디스크에 쓰기
-            fs.writeFileSync(path.join(dir, filename), file.buffer);
+            const destPath = path.join(dir, filename);
+
+            // 디스크에 원본 쓰기
+            fs.writeFileSync(destPath, file.buffer);
         });
 
         // 누적 용량 증가
@@ -205,9 +274,6 @@ app.post('/upload', upload.array('files', 20), (req, res) => {
         res.status(500).send('upload error');
     }
 });
-
-
-
 
 
 /* ===== 파일 트리 ===== */
@@ -307,21 +373,74 @@ app.get('/download', (req, res) => {
     const filename = path.basename(fullPath);
     const mimeType = mime.lookup(fullPath) || 'application/octet-stream';
 
-    // 헤더 설정: 다운로드로 강제
+    // 브라우저가 gzip 허용하면 gzip으로 스트리밍 (Content-Length 제거)
+    const acceptEnc = req.headers['accept-encoding'] || '';
+    const wantsGzip = acceptEnc.includes('gzip');
+
+    res.setHeader('Vary', 'Accept-Encoding');
     res.setHeader('Content-Type', mimeType);
-    res.setHeader('Content-Length', stat.size);
     // 파일명을 한글 등으로 안전하게 전송하려면 encodeURIComponent 처리
     res.setHeader('Content-Disposition', `attachment; filename*=UTF-8''${encodeURIComponent(filename)}`);
 
-    // 스트리밍 전송 (메모리 절약)
-    const stream = fs.createReadStream(fullPath);
-    stream.on('error', (err) => {
-        console.error(err);
-        if (!res.headersSent) res.status(500).end('File read error');
-    });
-    stream.pipe(res);
+    if (wantsGzip) {
+        // gzip 압축 스트리밍 전송
+        res.setHeader('Content-Encoding', 'gzip');
+        const readStream = fs.createReadStream(fullPath);
+        const gzip = zlib.createGzip({ level: zlib.constants.Z_BEST_COMPRESSION });
+        readStream.on('error', (err) => {
+            console.error(err);
+            if (!res.headersSent) res.status(500).end('File read error');
+        });
+        // Content-Length는 알 수 없으므로 제거/미설정
+        // 스트림 파이프
+        readStream.pipe(gzip).pipe(res);
+    } else {
+        // 원본 그대로 스트리밍 (Content-Length 설정)
+        res.setHeader('Content-Length', stat.size);
+        const stream = fs.createReadStream(fullPath);
+        stream.on('error', (err) => {
+            console.error(err);
+            if (!res.headersSent) res.status(500).end('File read error');
+        });
+        stream.pipe(res);
+    }
 });
 
+
+
+
+
+
+// ======= Brotli 정적 우선 서빙 미들웨어 =======
+// public 폴더에 미리 생성된 .br 파일이 있으면 Accept-Encoding: br인 경우 .br을 우선 서빙
+app.use((req, res, next) => {
+    if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+
+    const acceptEnc = req.headers['accept-encoding'] || '';
+    if (!acceptEnc.includes('br')) return next();
+
+    // 요청 경로 디코드하여 실제 파일 경로 계산
+    let reqPath = req.path;
+    try { reqPath = decodeURIComponent(reqPath); } catch (e) { /* ignore */ }
+
+    // 보안: 요청 경로가 루트 밖으로 나가지 않도록 처리
+    const filePath = path.join(__dirname, 'public', reqPath);
+    const brPath = filePath + '.br';
+
+    try {
+        if (fs.existsSync(brPath) && fs.statSync(brPath).isFile()) {
+            // Content-Type은 원래 확장자 기반으로 설정
+            res.setHeader('Content-Encoding', 'br');
+            res.setHeader('Vary', 'Accept-Encoding');
+            res.type(path.extname(filePath) || 'application/octet-stream');
+            return res.sendFile(brPath);
+        }
+    } catch (err) {
+        console.error('brotli serve error:', err);
+        // 에러가 나도 기본 static으로 넘김
+    }
+    return next();
+});
 
 // 서버 시작
 app.listen(PORT, '0.0.0.0', () => {

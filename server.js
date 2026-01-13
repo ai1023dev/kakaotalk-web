@@ -53,6 +53,41 @@ app.use(helmet({
     }
 }));
 
+
+
+// ======= Brotli 정적 우선 서빙 미들웨어 =======
+// public 폴더에 미리 생성된 .br 파일이 있으면 Accept-Encoding: br인 경우 .br을 우선 서빙
+app.use((req, res, next) => {
+    if (req.method !== 'GET' && req.method !== 'HEAD') return next();
+
+    const acceptEnc = req.headers['accept-encoding'] || '';
+    if (!acceptEnc.includes('br')) return next();
+
+    // 요청 경로 디코드하여 실제 파일 경로 계산
+    let reqPath = req.path;
+    try { reqPath = decodeURIComponent(reqPath); } catch (e) { /* ignore */ }
+
+    // 보안: 요청 경로가 루트 밖으로 나가지 않도록 처리
+    const filePath = path.join(__dirname, 'public', reqPath);
+    const brPath = filePath + '.br';
+
+    try {
+        if (fs.existsSync(brPath) && fs.statSync(brPath).isFile()) {
+            // Content-Type은 원래 확장자 기반으로 설정
+            res.setHeader('Content-Encoding', 'br');
+            res.setHeader('Vary', 'Accept-Encoding');
+            res.type(path.extname(filePath) || 'application/octet-stream');
+            return res.sendFile(brPath);
+        }
+    } catch (err) {
+        console.error('brotli serve error:', err);
+        // 에러가 나도 기본 static으로 넘김
+    }
+    return next();
+});
+
+
+
 // 미들웨어
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -407,40 +442,6 @@ app.get('/download', (req, res) => {
 });
 
 
-
-
-
-
-// ======= Brotli 정적 우선 서빙 미들웨어 =======
-// public 폴더에 미리 생성된 .br 파일이 있으면 Accept-Encoding: br인 경우 .br을 우선 서빙
-app.use((req, res, next) => {
-    if (req.method !== 'GET' && req.method !== 'HEAD') return next();
-
-    const acceptEnc = req.headers['accept-encoding'] || '';
-    if (!acceptEnc.includes('br')) return next();
-
-    // 요청 경로 디코드하여 실제 파일 경로 계산
-    let reqPath = req.path;
-    try { reqPath = decodeURIComponent(reqPath); } catch (e) { /* ignore */ }
-
-    // 보안: 요청 경로가 루트 밖으로 나가지 않도록 처리
-    const filePath = path.join(__dirname, 'public', reqPath);
-    const brPath = filePath + '.br';
-
-    try {
-        if (fs.existsSync(brPath) && fs.statSync(brPath).isFile()) {
-            // Content-Type은 원래 확장자 기반으로 설정
-            res.setHeader('Content-Encoding', 'br');
-            res.setHeader('Vary', 'Accept-Encoding');
-            res.type(path.extname(filePath) || 'application/octet-stream');
-            return res.sendFile(brPath);
-        }
-    } catch (err) {
-        console.error('brotli serve error:', err);
-        // 에러가 나도 기본 static으로 넘김
-    }
-    return next();
-});
 
 // 서버 시작
 app.listen(PORT, '0.0.0.0', () => {

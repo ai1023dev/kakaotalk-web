@@ -19,10 +19,21 @@ app.use(helmet({
             "script-src": [
                 "'self'",
                 "https://code.jquery.com",
-                "https://cdn.jsdelivr.net"
+                "https://cdn.jsdelivr.net",
+        	"https://us.i.posthog.com",
+        	"https://us.posthog.com",
+        	"https://us-assets.i.posthog.com",
+        	"https://internal-j.posthog.com",
+        	"https://static.cloudflareinsights.com",
+        	"https://crbug.com"
             ],
 
-            "connect-src": ["'self'"],
+            "connect-src": [
+            	"'self'",
+     		"https://us.i.posthog.com",
+        	"https://us.posthog.com",
+        	"https://us-assets.i.posthog.com"
+            ],
 
             "frame-src": [
                 "https://kweb1.siliod.com",
@@ -39,7 +50,8 @@ app.use(helmet({
 
             "style-src": [
                 "'self'",
-                "https://cdn.jsdelivr.net"
+                "https://cdn.jsdelivr.net",
+                "https://us.posthog.com"
             ],
 
             "font-src": [

@@ -1,0 +1,5 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://kakaotalk-web.siliod.com/sitemap.xml
+

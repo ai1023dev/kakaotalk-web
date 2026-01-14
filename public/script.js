@@ -1,3 +1,7 @@
+if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    location.replace('/mobile.html');
+}
+  
 let session_num;
 
 // 기존 시작하기 버튼 로직 유지

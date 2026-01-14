@@ -1,4 +1,13 @@
-if (/Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+  const ua = navigator.userAgent;
+
+  // 주요 검색엔진 봇
+  const isBot = /Googlebot|Google-InspectionTool|NaverBot|DaumBot|Bingbot|Slurp|YandexBot|DuckDuckBot/i.test(ua);
+
+  // 모바일 기기
+  const isMobile = /Android|iPhone|iPad|iPod/i.test(ua);
+
+  // 모바일 + 일반 사용자만 리다이렉트
+  if (isMobile && !isBot) {
     location.replace('/mobile.html');
   }
 

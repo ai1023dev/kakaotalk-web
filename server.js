@@ -19,10 +19,21 @@ app.use(helmet({
             "script-src": [
                 "'self'",
                 "https://code.jquery.com",
-                "https://cdn.jsdelivr.net"
+                "https://cdn.jsdelivr.net",
+        	"https://us.i.posthog.com",
+        	"https://us.posthog.com",
+        	"https://us-assets.i.posthog.com",
+        	"https://internal-j.posthog.com",
+        	"https://static.cloudflareinsights.com",
+        	"https://crbug.com"
             ],
 
-            "connect-src": ["'self'"],
+            "connect-src": [
+            	"'self'",
+     		"https://us.i.posthog.com",
+        	"https://us.posthog.com",
+        	"https://us-assets.i.posthog.com"
+            ],
 
             "frame-src": [
                 "https://kweb1.siliod.com",
@@ -39,7 +50,8 @@ app.use(helmet({
 
             "style-src": [
                 "'self'",
-                "https://cdn.jsdelivr.net"
+                "https://cdn.jsdelivr.net",
+                "https://us.posthog.com"
             ],
 
             "font-src": [
@@ -52,8 +64,6 @@ app.use(helmet({
         }
     }
 }));
-
-
 
 // ======= Brotli 정적 우선 서빙 미들웨어 =======
 // public 폴더에 미리 생성된 .br 파일이 있으면 Accept-Encoding: br인 경우 .br을 우선 서빙
@@ -85,8 +95,6 @@ app.use((req, res, next) => {
     }
     return next();
 });
-
-
 
 // 미들웨어
 app.use(express.json());
@@ -440,7 +448,6 @@ app.get('/download', (req, res) => {
         stream.pipe(res);
     }
 });
-
 
 
 // 서버 시작

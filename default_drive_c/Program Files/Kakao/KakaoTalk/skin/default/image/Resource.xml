@@ -691,11 +691,13 @@
 
   <image id="icon_voicetalk" src="svgs\groupfacetalk\chat_icon_voicetalk.svg"/>
   <image id="icon_voicetalk_cancel" src="svgs\groupfacetalk\chat_icon_voicetalk_cancel.svg"/>
+  <image id="icon_voicetalk_missed" src="svgs\groupfacetalk\chat_icon_voicetalk_missed.svg"/>
   <image id="icon_voicetalk_end" src="svgs\groupfacetalk\chat_icon_voicetalk_end.svg"/>
 
   <!--2.0 FaceTalk -->
   <image id="icon_facetalk" src="svgs\groupfacetalk\chat_icon_facetalk.svg" />
   <image id="icon_facetalk_cancel" src="svgs\groupfacetalk\chat_icon_facetalk_cancel.svg" />
+  <image id="icon_facetalk_missed" src="svgs\groupfacetalk\chat_icon_facetalk_missed.svg" />
   <image id="icon_facetalk_end" src="svgs\groupfacetalk\chat_icon_facetalk_end.svg"/>
 
   <image id="facetalk_btn_start" src="2.0\facetalk_btn_start.png" state="4"/>
@@ -1441,7 +1443,20 @@
     <piece state="disable" image_id="svgs\chatdlg_2510\chatroom_more_icon_hide.svg" opacity="80%"/>
     <piece state="down" image_id="svgs\chatdlg_2510\chatroom_more_icon_hide.svg" opacity="80%"/>
   </group_image>
+  
+  <group_image id="img_chatroom_voice_play" >
+    <piece state="normal" image_id="svgs\chatroom_btn_voice_play_normal.svg"/>
+    <piece state="hover" image_id="svgs\chatroom_btn_voice_play_hover.svg"/>
+    <piece state="disable" image_id="svgs\chatroom_btn_voice_play_disable.svg"/>
+    <piece state="down" image_id="svgs\chatroom_btn_voice_play_press.svg"/>
+  </group_image>
 
+  <group_image id="img_chatroom_voice_pause" >
+    <piece state="normal" image_id="svgs\chatroom_btn_voice_pause_normal.svg"/>
+    <piece state="hover" image_id="svgs\chatroom_btn_voice_pause_hover.svg"/>
+    <piece state="down" image_id="svgs\chatroom_btn_voice_pause_press.svg"/>
+  </group_image>
+  
   <!-- Emoticon View -->
   <group_image id="emoticon_btn_emote" >
     <piece state="hover" image_id="3.0\emoticon_btn_emote_active.9.png"/>
@@ -5499,6 +5514,7 @@
   <image id="universal_ico_caution" src="svgs\universal\universal_ico_caution.svg" />
   <image id="universal_bg_gradient" src="3.0\\universal_bg_gradient.png"/>
   <image id="universal_ico_openchat" src="svgs\universal\universal_ico_openchat.svg"/>
+  <image id="universal_ico_kanana" src="3.0\universal_ico_kanana.png"/>
 
   <!-- 채팅방 폴더 -->
   <image id="common_drag_handle" src="3.0\svgs\common_drag_handle.svg"/>

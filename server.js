@@ -20,19 +20,25 @@ app.use(helmet({
                 "'self'",
                 "https://code.jquery.com",
                 "https://cdn.jsdelivr.net",
-        	"https://us.i.posthog.com",
-        	"https://us.posthog.com",
-        	"https://us-assets.i.posthog.com",
-        	"https://internal-j.posthog.com",
-        	"https://static.cloudflareinsights.com",
-        	"https://crbug.com"
+                "https://us.i.posthog.com",
+                "https://us.posthog.com",
+                "https://us-assets.i.posthog.com",
+                "https://internal-j.posthog.com",
+                "https://static.cloudflareinsights.com",
+                "https://crbug.com",
+                "https://www.youtube.com",
+                "https://www.youtube-nocookie.com",
+                "https://www.gstatic.com"
             ],
 
             "connect-src": [
-            	"'self'",
-     		"https://us.i.posthog.com",
-        	"https://us.posthog.com",
-        	"https://us-assets.i.posthog.com"
+                "'self'",
+                "https://us.i.posthog.com",
+                "https://us.posthog.com",
+                "https://us-assets.i.posthog.com",
+                "https://www.youtube.com",
+                "https://www.youtube-nocookie.com",
+                "https://www.googleapis.com"
             ],
 
             "frame-src": [
@@ -45,7 +51,9 @@ app.use(helmet({
                 "https://kweb7.siliod.com",
                 "https://kweb8.siliod.com",
                 "https://kweb9.siliod.com",
-                "https://kweb10.siliod.com"
+                "https://kweb10.siliod.com",
+                "https://www.youtube.com",
+                "https://www.youtube-nocookie.com"
             ],
 
             "style-src": [
@@ -60,7 +68,11 @@ app.use(helmet({
                 "data:"
             ],
 
-            "img-src": ["'self'"]
+            "img-src": [
+                "'self'",
+                "https://i.ytimg.com",
+                "https://yt3.ggpht.com"
+            ]
         }
     }
 }));
@@ -137,7 +149,7 @@ app.get('/start_xpra', (req, res) => {
         }
     }
 
-    let session
+    let session = null
     // 꺼진 세션이 있는지 찾고 찾으면 " 켜짐 표시, IP, 타이머 " 설정
     for (let i = 0; i < session_list.length; i++) {
         if (!session_list[i].active) {
@@ -151,18 +163,22 @@ app.get('/start_xpra', (req, res) => {
         }
     }
 
-    // Xpra 실행
-    const cmd = `./start.sh ${session} &`
-    console.log(cmd)
-    exec(cmd);
+    if (session) {
+        // Xpra 실행
+        const cmd = `./start.sh ${session} &`
+        console.log(cmd)
+        exec(cmd);
 
-    // Nginx로 req.ip만 접속 가능하게 설정
-    const cmd_nginx = `sudo ${nginx_sh_dir}start_nginx.sh ${session} ${req.ip}`
-    console.log(cmd_nginx)
-    exec(cmd_nginx);
+        // Nginx로 req.ip만 접속 가능하게 설정
+        const cmd_nginx = `sudo ${nginx_sh_dir}start_nginx.sh ${session} ${req.ip}`
+        console.log(cmd_nginx)
+        exec(cmd_nginx);
 
-    console.log(session_list)
-    res.send({ num: session, dead_line: false })
+        console.log(session_list)
+        res.send({ num: session, dead_line: false })
+    } else {
+        res.send({ num: false })
+    }
 });
 
 
@@ -454,4 +470,3 @@ app.get('/download', (req, res) => {
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Express server listening on http://0.0.0.0:${PORT}`);
 });
-

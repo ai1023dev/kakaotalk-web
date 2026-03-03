@@ -1,5 +1,9 @@
 ## ChangeLogs
-### 25.11.0
+### 26.1.2
+
+• KakaoTalk is updated regularly in order to improve user experience and security. This update includes enhanced app usability and minor bug fixes to make instant messaging even more fun.
+
+### 25.11.1
 • You can now right-click a chatroom to easily add it to a folder.
 • The host can manage join/leave notifications in open chatrooms.
 • You can now preview link information from the input field before sending a link.
@@ -107,7 +111,3 @@ KakaoTalk has been working nonstop to eliminate all the hassles—both big and s
 
 • We've added a quiz feature to chatroom boards.
 • You can add members and designate admins using a QR code in team chatrooms.
-
-### 4.1.6
-
-• Bug fixes and stability improvements

@@ -4245,9 +4245,9 @@
     <ja>現在のバージョンでは表示できないメッセージです。アップデートするとメッセージが表示されます</ja>
   </String>
   <String ID="IDS_CHATLOG_100101">
-    <ko>지도 보기</ko>
-    <en>View Map</en>
-    <ja>地図表示</ja>
+    <ko>카카오맵</ko>
+    <en>Kakao Map</en>
+    <ja>Kakao Map</ja>
   </String>
   <String ID="IDS_CHATLOG_100102">
     <ko>샵검색</ko>
@@ -4893,11 +4893,6 @@
     <ko>업로드 실패</ko>
     <en>Failed to upload</en>
     <ja>アップロード失敗</ja>
-  </String>
-  <String ID="IDS_CHATLOG_AUDIOFILE_EXPIRED">
-    <ko>저장기간 만료</ko>
-    <en>Storage time expired</en>
-    <ja>保存期間満了</ja>
   </String>
   <String ID="IDS_CHATLOG_AUDIOFILE_BROKEN">
     <ko>음성 파일이 손상되어 재생할 수 없습니다.</ko>
@@ -7610,7 +7605,7 @@
     <en>Profile Badge</en>
     <ja>プロフィール認証バッジ</ja>
   </String>
-    <String ID="IDS_CHATROOM_NOTICE_100001">
+  <String ID="IDS_CHATROOM_NOTICE_100001">
     <ko>다시 열지 않음</ko>
     <en>Don’t Show Again</en>
     <ja>これ以上見ない</ja>
@@ -9022,9 +9017,9 @@
     <ja>返信/コメント通知</ja>
   </String>
   <String ID="IDS_ALARMSETTING_REPLY_INFO">
-    <ko>내가 전송한 메시지에 답장 또는 댓글이 달리면 채팅방 알림이 꺼져있어도 알림을 받을 수 있습니다.</ko>
-    <en>You can receive notifications for replies and threads to your messages even if you have chat notifications turned off.</en>
-    <ja>自分が送信したメッセージに返信やコメントがついた場合、トークルームの通知をオフにしていても通知を受信します。</ja>
+    <ko>내가 전송한 메시지에 답장 또는 댓글이 달리면 채팅방 알림이 꺼져 있어도 푸시알림을 받을 수 있습니다.</ko>
+    <en>You can receive push notifications for replies and threads to your messages even if you have chat notifications turned off.</en>
+    <ja>自分が送信したメッセージに返事やコメントがついた場合、トークルームの通知をオフにしていてもプッシュ通知を受信します。</ja>
   </String>
   <String ID="IDS_ALARMSETTING_MENTION">
     <ko>멘션 알림</ko>
@@ -9997,14 +9992,14 @@
     <ja>要約設定</ja>
   </String>
   <String ID="IDS_AI_SETTINGVIEW_100018">
-    <ko>대화/통화 요약 이용하기</ko>
-    <en>Summarize Chats/Calls</en>
-    <ja>会話/通話要約を利用する</ja>
+    <ko>대화/통화 요약</ko>
+    <en>Chat/Call Summary</en>
+    <ja>会話/通話要約</ja>
   </String>
   <String ID="IDS_AI_SETTINGVIEW_100019">
-    <ko>대화와 통화 내용을 AI가 간결하게 요약해 드려요. </ko>
-    <en>Get concise summaries of your chats and calls with AI.</en>
-    <ja>会話や通話内容をAIが簡潔に要約いたします。</ja>
+    <ko>주고 받은 내용을 간결하게 요약해 드려요.</ko>
+    <en>Provides concise summaries of your conversations.</en>
+    <ja>やり取りした内容を簡潔に要約します。</ja>
   </String>
   <!-- appinfo setting view -->
   <String ID="IDS_APP_INFO_SETTINGVIEW_100001">
@@ -12551,9 +12546,9 @@
     <ja>購読する</ja>
   </String>
   <String ID="IDS_BACKUPRESTORE_ERROR_100018">
-    <ko>저장 공간 부족</ko>
-    <en>Not Enough Space</en>
-    <ja>臨時保存容量不足</ja>
+    <ko>임시 백업 용량 부족</ko>
+    <en>Low Storage for Temporary Chat Backup</en>
+    <ja>一時バックアップの容量不足</ja>
   </String>
   <String ID="IDS_BACKUPRESTORE_ERROR_100019">
     <ko>백업 취소</ko>
@@ -14287,24 +14282,24 @@
     <ja>ファイル原本が満了したため、共有することができません。</ja>
   </String>
   <String ID="IDS_EXPIRED_SAVE_FAIL_TITLE">
-    <ko>파일을 저장할 수 없습니다.</ko>
-    <en>Failed to save file</en>
-    <ja>ファイルを保存できません。</ja>
-  </String>
-  <String ID="IDS_EXPIRED_SAVE_FAIL_TITLE_SUBSCRIBE">
-    <ko>파일을 불러올 수 없습니다.</ko>
+    <ko>파일 불러오기 실패</ko>
     <en>Failed to load file</en>
     <ja>ファイルを読み込めません。</ja>
   </String>
-  <String ID="IDS_EXPIRED_SAVE_FAIL">
-    <ko>유효기간 내에 파일을 다운받지 않은 경우 서버에서 완전히 삭제됩니다.&#10;톡클라우드를 구독하면 미디어 파일을 자동으로 백업하고 언제든 확인할 수 있어요!</ko>
-    <en>Files that have not been downloaded before expiry will be permanently deleted from the server.&#10;Subscribe to Talk Cloud to automatically back up media files to Talk Cloud for access anywhere, anytime!</en>
-    <ja>有効期限内にファイルをダウンロードしない場合、サーバーから完全に失われます。&#10;Talk Cloudをご利用いただくと、メディアやファイルを自動的にTalk Cloudにバックアップし、いつでも確認できるようになります！</ja>
+  <String ID="IDS_EXPIRED_SAVE_FAIL_DESC_FOR_DRAWER_USER">
+    <ko>아래와 같은 경우 파일이 복원되지 않을 수 있어요.&#10;∙ 구독 이전에 이미 만료된 파일인 경우&#10;∙ 파일이 정상적으로 백업되지 않은 경우&#10;∙ 백업된 파일을 톡클라우드에서 삭제한 경우</ko>
+    <en>Files may not be restored in the following cases:&#10;∙ If the file was not properly backed up&#10;∙ If the backed-up file was deleted from Talk Cloud&#10;∙ If the file had already expired before subscribing</en>
+    <ja>以下のような場合は、復元できないことがあります。&#10;・ファイルが正常にバックアップされていない場合&#10;・バックアップしたファイルをTalk Cloudから削除した場合&#10;・購読する以前にファイルが満了している場合</ja>
   </String>
-  <String ID="IDS_EXPIRED_SAVE_FAIL_SUBSCRIBED">
-    <ko>다음과 같은 경우 미디어를 복원할 수 없습니다.&#10;∙ 파일이 정상적으로 백업되지 않은 경우&#10;∙ 백업된 파일을 톡클라우드에서 삭제한 경우&#10;∙ 구독 이전에 이미 만료된 경우</ko>
-    <en>Media files may not be restored in the following cases:&#10;∙ If the file was not properly backed up&#10;∙ If the backed-up file was deleted from Talk Cloud&#10;∙ If the file had already expired before subscribing</en>
-    <ja>以下のような場合は、メディアを復元できないことがあります。&#10;・ファイルが正常にバックアップされていない場合&#10;・バックアップしたファイルをTalk Cloudから削除した場合&#10;・購読する以前に満了した場合</ja>
+  <String ID="IDS_EXPIRED_SAVE_FAIL_DESC_FOR_FREE_USER">
+    <ko>∙ 유효기간 내에 파일을 다운받지 않았다면 서버에서 완전히 삭제되어 확인할 수 없어요.&#10;∙ 톡클라우드를 구독하면 미디어 파일이 자동으로 백업되어 언제든 확인할 수 있어요.</ko>
+    <en>∙ Files that have not been downloaded before expiry will be permanently deleted from the server.&#10;∙ Subscribe to Talk Cloud to automatically back up media files to Talk Cloud for access anywhere, anytime.</en>
+    <ja>・有効期限内にファイルをダウンロードしない場合、サーバーから完全に失われます。&#10;・Talk Cloudをご利用いただくと、メディアやファイルが自動的にTalk Cloudにバックアップされ、いつでも確認できるようになります。</ja>
+  </String>
+  <String ID="IDS_EXPIRED_SAVE_FAIL_DESC_DRAWER_NOT_SUPPORTED">
+    <ko>원본 파일이 만료되어 파일을 불러올 수 없어요</ko>
+    <en>Failed to load file because the original file has expired.</en>
+    <ja>ファイル原本が満了され、ファイルを読み込むことができません。</ja>
   </String>
   <String ID="IDS_EXPIRED_FAIL_LANDING">
     <ko>더 알아보기</ko>
@@ -15658,6 +15653,16 @@
     <ko>이미 종료된 통화예요.&#10;다시 전화를 걸어 주세요.</ko>
     <en>This call has already ended.&#10;Please call again.</en>
     <ja>すでに終了した通話です。&#10;もう一度おかけ直しください。</ja>
+  </String>
+  <String ID="IDS_GROUPFACETALK_100119">
+    <ko>참여 중인 통화</ko>
+    <en>Ongoing call</en>
+    <ja>参加中の通話</ja>
+  </String>
+  <String ID="IDS_GROUPFACETALK_100120">
+    <ko>다른 기기에서 이미 참여 중인 통화예요.</ko>
+    <en>You’re already on this call from another device.</en>
+    <ja>他のデバイスですでに参加している通話です。</ja>
   </String>
   <String ID="IDS_GROUPFACETALK_TOOLTIP_ENDCALL">
     <ko>통화 종료</ko>
@@ -22420,7 +22425,7 @@
     <ja>解除</ja>
   </String>
   <String ID="IDS_VOICEROOM_SHARECONTENT_REGISTER">
-    <ko>등록</ko>
+    <ko>님이 함께보기를 등록함</ko>
     <en>Register</en>
     <ja>登録</ja>
   </String>
@@ -25627,6 +25632,11 @@
     <en>Unhide Silent Chatroom</en>
     <ja>静かなトークルームを表示</ja>
   </String>
+  <String ID="IDS_UNHIDE_ATTENTION_CHAT_THREAD_STORAGE">
+    <ko>댓글 모아보기 숨김 해제</ko>
+    <en>Show Threads</en>
+    <ja>コメント一覧を表示</ja>
+  </String>
   <String ID="IDS_SILENT_ROOM_HIDE_TOAST_MESSAGE">
     <ko>조용한 채팅방 숨김을 해제하려면&#10;채팅 > 조용한 채팅방 숨김 해제를 클릭하세요.</ko>
     <en>If you want unhide Silent Chatroom, go to Chat > and click on 'Unhide Silent Chatroom'.</en>
@@ -27302,8 +27312,7 @@
   <String ID="IDS_PARTNERCHAT_NOTI_WARNING">
     <ko>서비스 제공과 관련 없는 개인정보, 민감정보, 금전거래, 선입금, 직거래 요구를 받을 경우 또는 사기, 사칭이 의심되는 경우 신고해 주세요. 신고 방법등 자세한 사항은 여기를 참고해주세요.</ko>
     <en>Please report this chat if you suspect a scam or if the user solicits personal data, sensitive information, monetary transaction, meetup transaction, or advance payment not related to the provision of services. Click here for details, including how to report.</en>
-    <ja>サービスの提供とは関係のない個人情報、センシティブ情報、金銭取引、前払金、直接取引の要求を受けた場合や、詐欺もしくはなりすましが疑われる場合は報告してください。報告方法などの詳細についてはこちらをご確認ください。
-    </ja>
+    <ja>サービスの提供とは関係のない個人情報、センシティブ情報、金銭取引、前払金、直接取引の要求を受けた場合や、詐欺もしくはなりすましが疑われる場合は報告してください。報告方法などの詳細についてはこちらをご確認ください。</ja>
   </String>
   <String ID="IDS_PARTNERCHAT_NOTI_WARNING_LINK">
     <ko>여기</ko>
@@ -27651,14 +27660,14 @@
     <ja>コメント{}{}</ja>
   </String>
   <String ID="IDS_ATTENTION_CHAT_THREAD_LIST_TITLE">
-    <ko>댓글 알림</ko>
-    <en>Thread Notifications</en>
-    <ja>コメントの通知リスト</ja>
+    <ko>댓글 모아보기</ko>
+    <en>Threads</en>
+    <ja>コメント一覧</ja>
   </String>
   <String ID="IDS_ATTENTION_CHAT_THREAD_LIST_DESC_TITLE">
-    <ko>내가 참여한 댓글의 업데이트 알림입니다.</ko>
-    <en>You can receive notifications for updated threads.</en>
-    <ja>あなたが参加したコメントの更新通知です。</ja>
+    <ko>내가 참여한 댓글 모아보기입니다.</ko>
+    <en>This shows threads you’ve participated in.</en>
+    <ja>自分が参加したコメントを一覧で表示します。</ja>
   </String>
   <String ID="IDS_ATTENTION_CHAT_THREAD_LIST_DESC_CONTENT1">
     <ko>새 댓글, 멘션 알림을 받습니다. (참여하지 않은 댓글에서 멘션을 받았다면, 확인 후 알림이 목록에서 사라집니다.)</ko>
@@ -27691,14 +27700,14 @@
     <ja>{}|へのコメント</ja>
   </String>
   <String ID="IDS_CHATLIST_ATTENTION_CHAT_THREAD_STORAGE_ITEM_TITLE">
-    <ko>댓글 알림</ko>
-    <en>Thread Notifications</en>
-    <ja>コメントの通知リスト</ja>
+    <ko>댓글 모아보기</ko>
+    <en>Threads</en>
+    <ja>コメント一覧</ja>
   </String>
   <String ID="IDS_CHATLIST_ATTENTION_CHAT_THREAD_STORAGE_CTMENU_OPEN">
-    <ko>댓글 알림 열기</ko>
-    <en>Open thread notifications</en>
-    <ja>コメント通知を見る</ja>
+    <ko>댓글 모아보기 열기</ko>
+    <en>Open Threads</en>
+    <ja>コメント一覧を開く</ja>
   </String>
   <String ID="IDS_CHATLIST_ATTENTION_CHAT_THREAD_STORAGE_CTMENU_HIDE">
     <ko>숨김</ko>
@@ -27981,9 +27990,9 @@
     <ja>トークルームのタイトル</ja>
   </String>
   <String ID="IDS_THREAD_LIST_ATTENTION_HELP_DESC">
-    <ko>댓글 알림 설명을 들을 수 있습니다.</ko>
-    <en>Audio accessibility tool for thread notifications. Button.</en>
-    <ja>トークルームでのコメントの通知について説明を聞くことができるボタンです。</ja>
+    <ko>댓글 모아보기 설명을 들을 수 있습니다.</ko>
+    <en>You can hear an explanation of Threads.</en>
+    <ja>コメント一覧の説明を見ることができます</ja>
   </String>
   <String ID="IDS_CHATROOM_FOLDER_TAB_UNREAD">
     <ko>안읽음</ko>
@@ -28001,9 +28010,9 @@
     <ja>読み込めないメッセージです。</ja>
   </String>
   <String ID="IDS_ATTENTION_CHAT_THREAD_LIST_EMPTY">
-    <ko>댓글 알림이 없습니다.</ko>
-    <en>You have no thread notifications.</en>
-    <ja>コメントの通知がありません。</ja>
+    <ko>참여한 댓글이 없습니다.</ko>
+    <en>You haven’t participated in any threads yet.</en>
+    <ja>参加したコメントはありません。</ja>
   </String>
   <String ID="IDS_CHATROOM_FOLDER_CREATED_FOLDER">
     <ko>생성한 폴더 {}</ko>
@@ -28081,14 +28090,14 @@
     <ja>リストに戻る</ja>
   </String>
   <String ID="IDS_CHAT_THREAD_STORAGE_HIDE_POPUP_TITLE">
-    <ko>댓글 알림 숨김</ko>
-    <en>Hide thread notifications</en>
-    <ja>コメント通知を非表示</ja>
+    <ko>댓글 모아보기 숨김</ko>
+    <en>Hide Threads</en>
+    <ja>コメント一覧を非表示</ja>
   </String>
   <String ID="IDS_CHAT_THREAD_STORAGE_HIDE_POPUP_DESC">
-    <ko>숨긴 항목에 업데이트가 있으면 채팅목록에 다시 나타납니다.</ko>
-    <en>Hidden items will reappear in the chat list when updated.</en>
-    <ja>非表示にした項目にアップデートがあれば、トークリストに再び表示されます。</ja>
+    <ko>숨김을 해제하려면 채팅 > 댓글 모아보기 숨김 해제를 클릭하세요.</ko>
+    <en>To show Threads again, click Chat > Show Threads.</en>
+    <ja>再表示するには、チャット ＞ コメント一覧の表示をクリックしてください。</ja>
   </String>
   <String ID="IDS_CHAT_THREAD_STORAGE_HIDE_POPUP_BUTTON">
     <ko>숨김</ko>
@@ -28096,9 +28105,9 @@
     <ja>非表示</ja>
   </String>
   <String ID="TermsAgreementViewTitle">
-    <ko>놓친 대화와 긴 통화 요약&#10;이제 kanana에게 맡겨보세요</ko>
-    <en>Unread chats and long calls?&#10;Summarize with Kanana!</en>
-    <ja>見逃してしまったやり取りや&#10;長い通話内容の要約&#10;これからは、kananaにおまかせください</ja>
+    <ko>카카오톡이 더 편해지는 기술&#10;카나나 AI를 사용해요!</ko>
+    <en>Use Kanana AI&#10;to make KakaoTalk even more convenient!</en>
+    <ja>カカオトークがより便利になる技術&#10;Kanana AIを使ってみましょう！</ja>
   </String>
   <String ID="TermsAgreementViewCheckText">
     <ko>[필수] Kanana (AI) 데이터 처리 동의</ko>
@@ -28116,9 +28125,9 @@
     <ja>また今度</ja>
   </String>
   <String ID="TermsAgreementViewTerms">
-    <ko>카카오톡 이용의 편의성과 즐거움을 높이기 위해 다양한 AI 기능을 제공합니다. 이를 위해 아래와 같은 이용자 데이터를 처리합니다.&#10;· 채팅 메시지 등 서비스 이용 중 입력·공유한 데이터(텍스트, 미디어, URL 등 포함) 및 이용자 정보&#10;AI 서비스 제공에 활용된 개인정보는 해당 기능 제공 목적에 한하여 처리되며, 목적이 달성되면 지체 없이 파기합니다.&#10;카카오톡 AI 기능은 채팅 설정에서 언제든 ON/OFF 설정이 가능하며, 더 이상 사용을 원하지 않을 경우 동의를 철회하실 수 있습니다.&#10;&#10;본 동의는 카카오톡 내 여러 AI 기능 이용을 위한 것이며, 일부 서비스는 별도 동의를 요청할 수 있습니다.</ko>
-    <en>To enhance the convenience and enjoyment of using KakaoTalk, we provide a variety of AI features. For this purpose, we process the following user data.&#10;· Data entered or shared while using services such as chat (including text, media, URLs, etc.) and user information&#10;Personal information used for provision of AI service is processed solely for the purpose of providing the relevant feature and will be promptly deleted once that purpose has been fulfilled.&#10;You can turn KakaoTalk AI features ON or OFF at any time in your chat settings, and you may withdraw your consent if you no longer wish to use them.&#10;&#10;This consent applies to the use of various AI features within KakaoTalk, and some services may require separate consent.</en>
-    <ja>カカオトークでは、より便利で楽しくご利用いただけるよう、さまざまなAI機能をご提供いたします。そのために、以下のようなユーザーデータを処理します。&#10;・トークメッセージなどサービス利用中に入力・共有されたデータ(テキスト、メディア、URLなどを含む)及びユーザー情報&#10;AIサービス提供に活用された個人情報は、当該機能の提供目的の範囲内でのみ処理され、目的が達成された後は遅滞なく破棄されます。&#10;カカオトークのAI機能は、トーク設定からいつでもON/OFFにすることができます。また、以後は使用を希望されない場合は同意を撤回することも可能です。&#10;&#10;本同意は、カカオトーク内の様々なAI機能を利用するためのものであり、一部のサービスでは別途に同意を求める場合があります。</ja>
+    <ko>카카오톡 이용의 편의성과 즐거움을 높이기 위해 다양한 AI 기능을 제공합니다. 이를 위해 아래와 같은 이용자 데이터를 처리합니다.&#10;· 채팅 등 서비스 이용 중 입력·공유한 데이터(텍스트, 미디어, URL 등 포함) 및 이용자 정보&#10;&#10;AI 서비스 제공에 활용된 개인정보는 해당 기능 제공 목적에 한하여 처리되며, 목적이 달성되면 지체 없이 파기합니다.&#10;카카오톡 AI 기능 사용을 더 이상 원하지 않을 경우 채팅 설정에서 동의를 철회하실 수 있습니다.&#10;&#10;본 동의는 카카오톡 내 여러 AI 기능 이용을 위한 것이며, 일부 서비스는 별도 동의를 요청할 수 있습니다.</ko>
+    <en>KakaoTalk offers various AI features to enhance users’ convenience and enjoyment of our services. For this purpose, the following user data will be processed:&#10;Data entered or shared while using the service, such as chats (including text, media, URLs, etc.), and user information. &#10;&#10;Personal information used to provide AI services is processed solely for the purpose of providing those specific features and will be destroyed without delay once that purpose is fulfilled.&#10;If you no longer wish to use KakaoTalk AI features, you can withdraw your consent in the Chat Settings&#10;&#10;This consent is for the use of various AI features within KakaoTalk, and some services may require separate consent.</en>
+    <ja>カカオトークの利便性と楽しさを高めるために様々なAI機能を提供しています。そのために下記のようなユーザーデータを処理します。&#10;・トークなどサービスのご利用中に入力・共有したデータ(テキスト、メディア、リンクなどを含む)及びユーザー情報&#10;&#10;AIサービスの提供に利用した個人情報は、当該機能の提供目的に限り処理され、目的が達成された後は遅滞なく破棄します。&#10;以後、カカオトークのAI機能の利用を希望されない場合はトーク設定から同意を撤回することができます。&#10;&#10;本同意はカカオトーク内の複数のAI機能を利用するためのものであり、一部のサービスは別途同意を求めることがあります。</ja>
   </String>
   <String ID="IDS_CHATROOM_FOLDER_SERVICE_MAINTENANCE_TITLE">
     <ko>점검 중</ko>
@@ -28231,19 +28240,19 @@
     <ja>このデバイスのトーク内容を直接バックアップし、14日以内にアプリを再インストールすると復元できるようにします。</ja>
   </String>
   <String ID="IDS_EMOTICON_SUGGESTION">
-  	<ko>이모티콘 추천</ko>
-  	<en>Emoticon Suggestions</en>
-  	<ja>おすすめスタンプを表示</ja>
+    <ko>이모티콘 추천</ko>
+    <en>Emoticon Suggestions</en>
+    <ja>おすすめスタンプを表示</ja>
   </String>
   <String ID="IDS_EMOTICON_SUGGESTION_SEARCH_LOCK">
-  	<ko>잠금 해제</ko>
-  	<en>Unlock</en>
-  	<ja>ロック解除</ja>
+    <ko>잠금 해제</ko>
+    <en>Unlock</en>
+    <ja>ロック解除</ja>
   </String>
   <String ID="IDS_EMOTICON_SETTINGS_FOR_NONSUBSCRIBER">
-  	<ko>딱 맞는 내 이모티콘을 추천해 드립니다.</ko>
-  	<en>We provide the ideal emoticon for your messages.</en>
-  	<ja> お持ちのスタンプから最適なスタンプをピックアップします。</ja>
+    <ko>딱 맞는 내 이모티콘을 추천해 드립니다.</ko>
+    <en>We provide the ideal emoticon for your messages.</en>
+    <ja> お持ちのスタンプから最適なスタンプをピックアップします。</ja>
   </String>
   <String ID="IDS_CONTEXT_MENU_FOLDER_ADD_CHATROOM">
     <ko>폴더에 추가</ko>

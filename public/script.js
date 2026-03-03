@@ -1,15 +1,15 @@
-  const ua = navigator.userAgent;
+const ua = navigator.userAgent;
 
-  // 주요 검색엔진 봇
-  const isBot = /Googlebot|Google-InspectionTool|NaverBot|DaumBot|Bingbot|Slurp|YandexBot|DuckDuckBot/i.test(ua);
+// 주요 검색엔진 봇
+const isBot = /Googlebot|Google-InspectionTool|NaverBot|DaumBot|Bingbot|Slurp|YandexBot|DuckDuckBot/i.test(ua);
 
-  // 모바일 기기
-  const isMobile = /Android|iPhone|iPad|iPod/i.test(ua);
+// 모바일 기기
+const isMobile = /Android|iPhone|iPad|iPod/i.test(ua);
 
-  // 모바일 + 일반 사용자만 리다이렉트
-  if (isMobile && !isBot) {
+// 모바일 + 일반 사용자만 리다이렉트
+if (isMobile && !isBot) {
     location.replace('/mobile.html');
-  }
+}
 
 !function (t, e) { var o, n, p, r; e.__SV || (window.posthog = e, e._i = [], e.init = function (i, s, a) { function g(t, e) { var o = e.split("."); 2 == o.length && (t = t[o[0]], e = o[1]), t[e] = function () { t.push([e].concat(Array.prototype.slice.call(arguments, 0))) } } (p = t.createElement("script")).type = "text/javascript", p.crossOrigin = "anonymous", p.async = !0, p.src = s.api_host.replace(".i.posthog.com", "-assets.i.posthog.com") + "/static/array.js", (r = t.getElementsByTagName("script")[0]).parentNode.insertBefore(p, r); var u = e; for (void 0 !== a ? u = e[a] = [] : a = "posthog", u.people = u.people || [], u.toString = function (t) { var e = "posthog"; return "posthog" !== a && (e += "." + a), t || (e += " (stub)"), e }, u.people.toString = function () { return u.toString(1) + ".people (stub)" }, o = "init capture register register_once register_for_session unregister unregister_for_session getFeatureFlag getFeatureFlagPayload isFeatureEnabled reloadFeatureFlags updateEarlyAccessFeatureEnrollment getEarlyAccessFeatures on onFeatureFlags onSessionId getSurveys getActiveMatchingSurveys renderSurvey canRenderSurvey getNextSurveyStep identify setPersonProperties group resetGroups setPersonPropertiesForFlags resetPersonPropertiesForFlags setGroupPropertiesForFlags resetGroupPropertiesForFlags reset get_distinct_id getGroups get_session_id get_session_replay_url alias set_config startSessionRecording stopSessionRecording sessionRecordingStarted captureException loadToolbar get_property getSessionProperty createPersonProfile opt_in_capturing opt_out_capturing has_opted_in_capturing has_opted_out_capturing clear_opt_in_out_capturing debug".split(" "), n = 0; n < o.length; n++)g(u, o[n]); e._i.push([i, s, a]) }, e.__SV = 1) }(document, window.posthog || []);
 posthog.init('phc_NjxjcEZjI7odSJgsoo2gdpjrE5hdDFjmXmNVCqHiTXy', { api_host: 'https://us.i.posthog.com' })
@@ -29,19 +29,23 @@ $(document).on('click', '#show-iframe', function () {
     $.ajax({
         method: 'GET',
         url: '/start_xpra',
-        success: function (data) {console.log(data)
-            timer(data.dead_line)
-            session_num = data.num;
-            setTimeout(function () {
-                $('main').append(`<iframe src="https://kweb${session_num}.siliod.com/?floating_menu=0" frameborder="0"></iframe>`);
-            }, 4000);
-            setTimeout(function () {
-                $('.start-page').css('opacity', 0);
-                setTimeout(() => {
-                    $('.start-page').css('z-index', '-100');
-                }, 300);
-            }, 6000);
-
+        success: function (data) {
+            if (data.num) {
+                console.log(data)
+                timer(data.dead_line)
+                session_num = data.num;
+                setTimeout(function () {
+                    $('main').append(`<iframe id="xpra-display" src="https://kweb${session_num}.siliod.com/?floating_menu=0" frameborder="0"></iframe>`);
+                }, 4000);
+                setTimeout(function () {
+                    $('.start-page').css('opacity', 0);
+                    setTimeout(() => {
+                        $('.start-page').css('z-index', '-100');
+                    }, 300);
+                }, 6000);
+            } else {
+                alert("최대 동접자가 초과 되었습니다. 다음에 다시 접속해 주세요.")
+            }
         },
         error: function (xhr, status, error) {
             alert('서버 측 에러');
@@ -56,7 +60,7 @@ function timer(dead_line) {
     // 1️⃣ deadline이 없으면 30분
     if (!dead_line) {
         totalSeconds = 30 * 60;
-    } 
+    }
     // 2️⃣ deadline이 있으면 현재 시간 ~ 종료 시간 차이
     else {
         const endTime = new Date(dead_line).getTime();
@@ -99,7 +103,7 @@ function disconnect() {
     $('.start-page').html(startPageOriginalHTML);
     $('.start-page').css('z-index', '10000');
     $('.start-page').css('opacity', '1');
-    $('iframe').remove();
+    $('#xpra-display').remove();
 
     $.ajax({
         method: 'GET',

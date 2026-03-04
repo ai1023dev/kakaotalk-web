@@ -36,13 +36,13 @@ $(document).on('click', '#show-iframe', function () {
                 session_num = data.num;
                 setTimeout(function () {
                     $('main').append(`<iframe id="xpra-display" src="https://kweb${session_num}.siliod.com/?floating_menu=0" frameborder="0"></iframe>`);
-                }, 4000);
+                }, 7000);
                 setTimeout(function () {
                     $('.start-page').css('opacity', 0);
                     setTimeout(() => {
                         $('.start-page').css('z-index', '-100');
                     }, 300);
-                }, 6000);
+                }, 9000);
             } else {
                 alert("최대 동접자가 초과 되었습니다. 다음에 다시 접속해 주세요.")
             }

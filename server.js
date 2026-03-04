@@ -137,61 +137,69 @@ let session_list = [
 ////////////////////////////////////////////////////////
 
 
-
-
+function isSafeShellArg(ip) {
+    if (typeof ip !== 'string') return false
+    return /^[0-9a-fA-F:.\-]+$/.test(ip)
+}
 
 app.get('/start_xpra', (req, res) => {
-    // 이미 같은 IP로 실행중인 세션이 있으면 그 세션 주고 리턴
-    for (let i = 0; i < session_list.length; i++) {
-        if (session_list[i].user_ip === req.ip) {
-            res.send({ num: session_list[i].num, dead_line: session_list[i].dead_line });
-            return;
+    const client = String(req.ip)
+    if (isSafeShellArg(client)) {
+        // 이미 같은 IP로 실행중인 세션이 있으면 그 세션 주고 리턴
+        for (let i = 0; i < session_list.length; i++) {
+            if (session_list[i].user_ip === req.ip) {
+                res.send({ num: session_list[i].num, dead_line: session_list[i].dead_line });
+                return;
+            }
         }
-    }
 
-    let session = null
-    // 꺼진 세션이 있는지 찾고 찾으면 " 켜짐 표시, IP, 타이머 " 설정
-    for (let i = 0; i < session_list.length; i++) {
-        if (!session_list[i].active) {
-            session = session_list[i].num
-            session_list[i].active = true
-            session_list[i].user_ip = req.ip
-            const now = new Date();
-            const after30m = new Date(now.getTime() + 30 * 60 * 1000);
-            session_list[i].dead_line = after30m
-            break;
+        let session = null
+        // 꺼진 세션이 있는지 찾고 찾으면 " 켜짐 표시, IP, 타이머 " 설정
+        for (let i = 0; i < session_list.length; i++) {
+            if (!session_list[i].active) {
+                session = session_list[i].num
+                session_list[i].active = true
+                session_list[i].user_ip = req.ip
+                const now = new Date();
+                const after30m = new Date(now.getTime() + 30 * 60 * 1000);
+                session_list[i].dead_line = after30m
+                break;
+            }
         }
-    }
 
-    if (session) {
-        // Xpra 실행
-        const cmd = `./start.sh ${session} &`
-        console.log(cmd)
-        exec(cmd);
+        if (session) {
+            // Xpra 실행
+            const cmd = `./start.sh ${session} &`
+            console.log(cmd)
+            exec(cmd);
 
-        // Nginx로 req.ip만 접속 가능하게 설정
-        const cmd_nginx = `sudo ${nginx_sh_dir}start_nginx.sh ${session} ${req.ip}`
-        console.log(cmd_nginx)
-        exec(cmd_nginx);
+            // Nginx로 req.ip만 접속 가능하게 설정
+            const cmd_nginx = `sudo ${nginx_sh_dir}start_nginx.sh ${session} ${req.ip}`
+            console.log(cmd_nginx)
+            exec(cmd_nginx);
 
-        console.log(session_list)
-        res.send({ num: session, dead_line: false })
-    } else {
-        res.send({ num: false })
+            console.log(session_list)
+            res.send({ num: session, dead_line: false })
+        } else {
+            res.send({ num: false })
+        }
     }
 });
 
 
 app.get('/stop_xpra', (req, res) => {
-    // 유저의 IP로 등록되어 실행중인 세션을 찾아 stop_xpra()
-    for (let i = 0; i < session_list.length; i++) {
-        if (session_list[i].user_ip === req.ip) {
-            stop_xpra(session_list[i].num)
-            break;
+    const client = String(req.ip)
+    if (isSafeShellArg(client)) {
+        // 유저의 IP로 등록되어 실행중인 세션을 찾아 stop_xpra()
+        for (let i = 0; i < session_list.length; i++) {
+            if (session_list[i].user_ip === req.ip) {
+                stop_xpra(session_list[i].num)
+                break;
+            }
         }
-    }
 
-    res.send(true)
+        res.send(true)
+    }
 });
 
 function stop_xpra(session) {

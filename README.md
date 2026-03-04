@@ -19,12 +19,12 @@ Xpra, Bottles 등을 활용하여 로컬 앱 환경과 비슷하게 동작하도
 - 카카오 사측 허락 안 받음
 
 ## 기술 개요
-1. Bottles (리눅스에서 윈도우 EXE 파일을 실행하게 해주는 프로그램) 에서 카카오톡 PC버전 실행
-2. xpra (웹에서 GUI 원격조작을 가능하게하는 오픈소스) 로 카카오톡 화면을 공유
-3. 보안을 위해 위 과정을 IP기반 세션으로 제어
+1. Bottles(리눅스에서 윈도우 EXE 파일을 실행하게 해주는 프로그램)에서 카카오톡 PC버전 실행
+2. xpra(웹에서 GUI 원격 조작을 가능하게 하는 오픈소스)로 카카오톡 화면을 공유
+3. 보안을 위해 위 과정을 IP 기반 세션으로 제어
 
 ## 버전
-##### (고급 기능을 사용하는건 아니라 딱히 상관 없을 듯 하다.)
+##### (고급 기능을 사용하는 건 아니라 딱히 상관없을 듯하다.)
 - Xpra / v5.1.4-r0
 - Bottles / v60
 - Node.js / v20.19.6
@@ -43,8 +43,8 @@ Xpra, Bottles 등을 활용하여 로컬 앱 환경과 비슷하게 동작하도
 ## 개발 폴더 외 설정
 
 ### CloudFlare 터널 & Nginx
-##### 8080 포트 메인 서버 -> 메인 도메인(kakaotalk-web.siliod.com 사실 서브 도메인)으로 터널링
-##### 14401-14410 xpra 서버 -> Nginx(IP 차단용) -> 서브 도메인(kweb${1-10}.siliod.com)으로 터널링 (iframe kakaotalk-web.siliod.com에서 허용)
+##### 8080 포트 메인 서버 -> 메인 도메인(kakaotalk-web.siliod.com, 사실 서브 도메인)으로 터널링
+##### 14401-14410 xpra 서버 -> Nginx(IP 차단용) -> 서브 도메인(kweb${1-10}.siliod.com)으로 터널링(kakaotalk-web.siliod.com의 iframe에서 허용)
 
 ### Nginx conf 파일
 server {
@@ -62,13 +62,13 @@ server {
         proxy_http_version 1.1;
         proxy_set_header Upgrade $http_upgrade;
         proxy_set_header Connection "upgrade";
-        proxy_set_header Host $host;가
+        proxy_set_header Host $host;
         real_ip_header CF-Connecting-IP;
         real_ip_recursive on;
     }
 }
 
-1~10 까지 다 적기
+1~10까지 다 적기
 
 ### Visudo (sudo 비번 프리 패싱)
 kweb ALL=(root) NOPASSWD: /home/kweb/Desktop/kakaotalk-web/start_nginx.sh
@@ -77,4 +77,4 @@ kweb ALL=(root) NOPASSWD: /home/kweb/Desktop/kakaotalk-web/stop_nginx.sh
 추가
 
 ### Bottles
-kweb-1~10 이름으로 카카오톡 미리 설치 + C드라이브 제외한 권한 및 스토리지 삭제
+kweb-1~10 이름으로 카카오톡 미리 설치 + C 드라이브를 제외한 권한 및 스토리지 삭제

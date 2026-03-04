@@ -20,7 +20,7 @@ exec xpra start "$DISPLAY" \
   --start-child="sh -c '
     export XDG_RUNTIME_DIR=/run/user/$(id -u)
     export DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus
-    sleep 2
+    sleep 10
     flatpak run --command=bottles-cli com.usebottles.bottles run -b \"$BOTTLE\" -p KakaoTalk
   '" \
   --exit-with-children=no \

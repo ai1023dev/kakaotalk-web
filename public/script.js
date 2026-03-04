@@ -19,11 +19,8 @@ let session_num;
 
 // 기존 시작하기 버튼 로직 유지
 $(document).on('click', '#show-iframe', function () {
-    $('.header-right').css('opacity', '1');
-    $('.header-right-no-click').css('z-index', '-100');
-    $('.start-page > *:not(.loading)').css('opacity', '0');
     setTimeout(() => {
-        $('.start-page').html('<img class="loading" src="./img/loading.gif" style="display:none"/><span class="warning">페이지 로딩 후 카카오톡 창이 표시될 때까지 잠시 기다려 주세요</span>');
+        $('.start-page').html('<img class="loading" src="./img/loading.gif" style="display:none"/><span class="warning">페이지 로딩 후 카카오톡 창이 표시될 때까지 잠시 기다려 주세요. (예상: 15초)</span>');
         $('.loading').fadeIn(300);
     }, 300);
     $.ajax({
@@ -36,13 +33,17 @@ $(document).on('click', '#show-iframe', function () {
                 session_num = data.num;
                 setTimeout(function () {
                     $('main').append(`<iframe id="xpra-display" src="https://kweb${session_num}.siliod.com/?floating_menu=0" frameborder="0"></iframe>`);
-                }, 7000);
+                }, 12000);
                 setTimeout(function () {
+                $('.header-right').css('opacity', '1');
+    		$('.header-right-no-click').css('z-index', '-100');
+    		$('.start-page > *:not(.loading)').css('opacity', '0');
+    
                     $('.start-page').css('opacity', 0);
                     setTimeout(() => {
                         $('.start-page').css('z-index', '-100');
                     }, 300);
-                }, 9000);
+                }, 15000);
             } else {
                 alert("최대 동접자가 초과 되었습니다. 다음에 다시 접속해 주세요.")
             }

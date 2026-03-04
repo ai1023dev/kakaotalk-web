@@ -170,15 +170,23 @@ app.get('/start_xpra', (req, res) => {
         if (session) {
             // Xpra 실행
             const cmd = `./start.sh ${session} &`
-            console.log(cmd)
             exec(cmd);
 
             // Nginx로 req.ip만 접속 가능하게 설정
             const cmd_nginx = `sudo ${nginx_sh_dir}start_nginx.sh ${session} ${req.ip}`
-            console.log(cmd_nginx)
             exec(cmd_nginx);
 
             console.log(session_list)
+            console.log('----------------------------------------')
+            session_list
+                .filter(s => s.active === true)
+                .forEach(s => {
+                    console.log(`num: ${s.num}, ip: ${s.user_ip}`)
+                })
+            console.log('----------------------------------------')
+            console.log(cmd)
+            console.log(cmd_nginx)
+
             res.send({ num: session, dead_line: false })
         } else {
             res.send({ num: false })
@@ -210,7 +218,6 @@ function stop_xpra(session) {
 
     // Xpra 끄기
     const cmd = `./stop.sh ${session}`
-    console.log(cmd)
     exec(cmd, (error, stdout, stderr) => {
         // 혹시 모르니 비활성화는 모든 작업 끝난후
         session_list[session - 1].active = false
@@ -218,10 +225,18 @@ function stop_xpra(session) {
 
     // 접근 허용 가능 IP 없애기
     const cmd_nginx = `sudo ${nginx_sh_dir}stop_nginx.sh ${session}`
-    console.log(cmd_nginx)
     exec(cmd_nginx);
 
     console.log(session_list)
+    console.log('----------------------------------------')
+    session_list
+        .filter(s => s.active === true)
+        .forEach(s => {
+            console.log(`num: ${s.num}, ip: ${s.user_ip}`)
+        })
+    console.log('----------------------------------------')
+    console.log(cmd)
+    console.log(cmd_nginx)
 }
 
 // 30초 마다 30분의 이용시간 타이머가 지난 세션을 검사후 종료

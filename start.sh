@@ -17,8 +17,13 @@ BOTTLE="kweb-$IDX"
 exec xpra start "$DISPLAY" \
   --bind-tcp=0.0.0.0:"$PORT" \
   --html=on \
-  --start-child="flatpak run --command=bottles-cli com.usebottles.bottles run -b \"$BOTTLE\" -p KakaoTalk" \
-  --exit-with-children=yes \
+  --start-child="sh -c '
+    export XDG_RUNTIME_DIR=/run/user/$(id -u)
+    export DBUS_SESSION_BUS_ADDRESS=unix:path=$XDG_RUNTIME_DIR/bus
+    sleep 2
+    flatpak run --command=bottles-cli com.usebottles.bottles run -b \"$BOTTLE\" -p KakaoTalk
+  '" \
+  --exit-with-children=no \
   --start-new-commands=no \
   --daemon=no \
   --file-transfer=no \

@@ -374,7 +374,7 @@ li {
 
 .yt-channel-banner {
     width: 100%;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     border-radius: 10px;
     transition: transform 0.15s ease, box-shadow 0.15s ease;
 }
@@ -384,10 +384,11 @@ li {
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
 }
 
-.kakao-web-yt {
+.yt-video {
     width: 100%;
     height: calc((20vw - 32px) / 16 * 9);
     border-radius: 10px;
+    margin-bottom: 4px;
 }
 
 

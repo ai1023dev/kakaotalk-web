@@ -186,6 +186,8 @@ app.get('/start_xpra', (req, res) => {
             console.log('----------------------------------------')
             console.log(cmd)
             console.log(cmd_nginx)
+            const now = new Date();
+	    console.log(now.toLocaleString('ko-KR'));
 
             res.send({ num: session, dead_line: false })
         } else {
@@ -237,6 +239,8 @@ function stop_xpra(session) {
     console.log('----------------------------------------')
     console.log(cmd)
     console.log(cmd_nginx)
+    const now = new Date();
+    console.log(now.toLocaleString('ko-KR'));
 }
 
 // 30초 마다 30분의 이용시간 타이머가 지난 세션을 검사후 종료

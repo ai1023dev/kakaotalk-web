@@ -78,3 +78,17 @@ kweb ALL=(root) NOPASSWD: /home/kweb/Desktop/kakaotalk-web/stop_nginx.sh
 
 ### Bottles
 kweb-1~10 이름으로 카카오톡 미리 설치 + C 드라이브를 제외한 권한 및 스토리지 삭제
+
+
+
+
+
+## 라이선스
+Permission is granted to view this source code for educational purposes only.
+
+You may NOT:
+- Use this code in production
+- Modify or distribute it
+- Use it commercially
+
+All rights reserved by the author.

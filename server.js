@@ -10,12 +10,18 @@ const dotenv = require("dotenv");
 const zlib = require('zlib');
 dotenv.config();
 
+const PORT = 8080;
+const nginx_sh_dir = '/home/kweb/Desktop/kakaotalk-web/';
+const SHARE_DIR = '/home/kweb/.var/app/com.usebottles.bottles/data/bottles/bottles';
+const TMP_UPLOAD_DIR = path.join(__dirname, '.tmp-uploads');
+const max_volume = 500 * 1024 * 1024; // 500MB
+
+fs.mkdirSync(TMP_UPLOAD_DIR, { recursive: true });
+
 app.use(helmet({
     contentSecurityPolicy: {
-        useDefaults: false,
         directives: {
             "default-src": ["'self'"],
-
             "script-src": [
                 "'self'",
                 "https://code.jquery.com",
@@ -25,12 +31,10 @@ app.use(helmet({
                 "https://us-assets.i.posthog.com",
                 "https://internal-j.posthog.com",
                 "https://static.cloudflareinsights.com",
-                "https://crbug.com",
                 "https://www.youtube.com",
                 "https://www.youtube-nocookie.com",
                 "https://www.gstatic.com"
             ],
-
             "connect-src": [
                 "'self'",
                 "https://us.i.posthog.com",
@@ -40,7 +44,6 @@ app.use(helmet({
                 "https://www.youtube-nocookie.com",
                 "https://www.googleapis.com"
             ],
-
             "frame-src": [
                 "https://kweb1.siliod.com",
                 "https://kweb2.siliod.com",
@@ -55,24 +58,24 @@ app.use(helmet({
                 "https://www.youtube.com",
                 "https://www.youtube-nocookie.com"
             ],
-
             "style-src": [
                 "'self'",
+                "'unsafe-inline'",
                 "https://cdn.jsdelivr.net",
                 "https://us.posthog.com"
             ],
-
             "font-src": [
                 "'self'",
                 "https://cdn.jsdelivr.net",
                 "data:"
             ],
-
             "img-src": [
                 "'self'",
+                "data:",
                 "https://i.ytimg.com",
                 "https://yt3.ggpht.com"
-            ]
+            ],
+            "frame-ancestors": ["'self'"]
         }
     }
 }));
@@ -112,14 +115,7 @@ app.use((req, res, next) => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
-app.set('trust proxy', true);
-
-
-//////////////////// 기본 세팅 값 //////////////////////
-
-const PORT = 8080;
-
-const nginx_sh_dir = '/home/kweb/Desktop/kakaotalk-web/'
+app.set('trust proxy', 'loopback');
 
 let session_list = [
     { num: 1, active: false, user_ip: null, dead_line: null, upload_volume: 0 },
@@ -136,80 +132,210 @@ let session_list = [
 
 ////////////////////////////////////////////////////////
 
+const rateLimits = new Map();
+
+function makeRateLimiter(key, limit, windowMs) {
+    return (req, res, next) => {
+        const bucketKey = `${key}:${req.ip}`;
+        const now = Date.now();
+        const windowStart = now - windowMs;
+        const timestamps = rateLimits.get(bucketKey) || [];
+        const recent = timestamps.filter(ts => ts > windowStart);
+
+        if (recent.length >= limit) {
+            return res.status(429).send('too_many_requests');
+        }
+
+        recent.push(now);
+        rateLimits.set(bucketKey, recent);
+        next();
+    };
+}
+
+function requireSameOrigin(req, res, next) {
+    const fetchSite = req.get('sec-fetch-site');
+    if (fetchSite && ['same-origin', 'same-site', 'none'].includes(fetchSite)) {
+        return next();
+    }
+
+    const expectedOrigin = `${req.protocol}://${req.get('host')}`;
+    const origin = req.get('origin');
+    if (origin) {
+        return origin === expectedOrigin ? next() : res.status(403).send('forbidden_origin');
+    }
+
+    const referer = req.get('referer');
+    if (referer) {
+        return referer.startsWith(`${expectedOrigin}/`) || referer === expectedOrigin
+            ? next()
+            : res.status(403).send('forbidden_origin');
+    }
+
+    return res.status(403).send('forbidden_origin');
+}
+
+function getSessionByIp(ip) {
+    return session_list.find(session => session.user_ip === ip) || null;
+}
+
+function getSessionRoot(session) {
+    return path.join(
+        SHARE_DIR,
+        `kweb-${session}`,
+        'drive_c/users/steamuser'
+    );
+}
+
+function getDesktopDir(session) {
+    return path.join(getSessionRoot(session), 'Desktop');
+}
+
+function sanitizeFilename(originalName) {
+    const decoded = Buffer.from(String(originalName || ''), 'latin1').toString('utf8');
+    const basename = path.basename(decoded);
+    const sanitized = basename
+        .replace(/[\u0000-\u001f\u007f]/g, '')
+        .replace(/[\\/]/g, '')
+        .trim();
+
+    if (!sanitized || sanitized === '.' || sanitized === '..') {
+        return null;
+    }
+
+    return sanitized;
+}
+
+function safeUnlink(filePath) {
+    try {
+        fs.unlinkSync(filePath);
+    } catch (err) {
+        if (err.code !== 'ENOENT') {
+            console.error('cleanup error:', err);
+        }
+    }
+}
+
+function cleanupUploadedFiles(files = []) {
+    files.forEach(file => {
+        if (file && file.path) {
+            safeUnlink(file.path);
+        }
+    });
+}
+
+function cleanupMovedFiles(paths = []) {
+    paths.forEach(filePath => safeUnlink(filePath));
+}
+
+function getUniqueDestination(dir, filename) {
+    const ext = path.extname(filename);
+    const base = path.basename(filename, ext);
+    let candidate = filename;
+    let counter = 1;
+
+    while (fs.existsSync(path.join(dir, candidate))) {
+        candidate = `${base}(${counter})${ext}`;
+        counter++;
+    }
+
+    return path.join(dir, candidate);
+}
 
 function isSafeShellArg(ip) {
     if (typeof ip !== 'string') return false
     return /^[0-9a-fA-F:.\-]+$/.test(ip)
 }
 
-app.get('/start_xpra', (req, res) => {
+const startMiddlewares = [
+    requireSameOrigin,
+    makeRateLimiter('start-xpra', 5, 10 * 60 * 1000)
+];
+
+const stopMiddlewares = [
+    requireSameOrigin,
+    makeRateLimiter('stop-xpra', 10, 10 * 60 * 1000)
+];
+
+app.all('/start_xpra', ...startMiddlewares, (req, res) => {
+    if (!['GET', 'POST'].includes(req.method)) {
+        return res.status(405).send('method_not_allowed');
+    }
+
     const client = String(req.ip)
-    if (isSafeShellArg(client)) {
-        // 이미 같은 IP로 실행중인 세션이 있으면 그 세션 주고 리턴
-        for (let i = 0; i < session_list.length; i++) {
-            if (session_list[i].user_ip === req.ip) {
-                res.send({ num: session_list[i].num, dead_line: session_list[i].dead_line });
-                return;
-            }
+    if (!isSafeShellArg(client)) {
+        return res.status(400).send({ num: false });
+    }
+
+    // 이미 같은 IP로 실행중인 세션이 있으면 그 세션 주고 리턴
+    for (let i = 0; i < session_list.length; i++) {
+        if (session_list[i].user_ip === req.ip) {
+            res.send({ num: session_list[i].num, dead_line: session_list[i].dead_line });
+            return;
         }
+    }
 
-        let session = null
-        // 꺼진 세션이 있는지 찾고 찾으면 " 켜짐 표시, IP, 타이머 " 설정
-        for (let i = 0; i < session_list.length; i++) {
-            if (!session_list[i].active) {
-                session = session_list[i].num
-                session_list[i].active = true
-                session_list[i].user_ip = req.ip
-                const now = new Date();
-                const after30m = new Date(now.getTime() + 30 * 60 * 1000);
-                session_list[i].dead_line = after30m
-                break;
-            }
-        }
-
-        if (session) {
-            // Xpra 실행
-            const cmd = `./start.sh ${session} &`
-            exec(cmd);
-
-            // Nginx로 req.ip만 접속 가능하게 설정
-            const cmd_nginx = `sudo ${nginx_sh_dir}start_nginx.sh ${session} ${req.ip}`
-            exec(cmd_nginx);
-
-            console.log(session_list)
-            console.log('----------------------------------------')
-            session_list
-                .filter(s => s.active === true)
-                .forEach(s => {
-                    console.log(`num: ${s.num}, ip: ${s.user_ip}`)
-                })
-            console.log('----------------------------------------')
-            console.log(cmd)
-            console.log(cmd_nginx)
+    let session = null
+    // 꺼진 세션이 있는지 찾고 찾으면 " 켜짐 표시, IP, 타이머 " 설정
+    for (let i = 0; i < session_list.length; i++) {
+        if (!session_list[i].active) {
+            session = session_list[i].num
+            session_list[i].active = true
+            session_list[i].user_ip = req.ip
             const now = new Date();
-	    console.log(now.toLocaleString('ko-KR'));
-
-            res.send({ num: session, dead_line: false })
-        } else {
-            res.send({ num: false })
+            const after30m = new Date(now.getTime() + 30 * 60 * 1000);
+            session_list[i].dead_line = after30m
+            break;
         }
+    }
+
+    if (session) {
+        // Xpra 실행
+        const cmd = `./start.sh ${session} &`
+        exec(cmd);
+
+        // Nginx로 req.ip만 접속 가능하게 설정
+        const cmd_nginx = `sudo ${nginx_sh_dir}start_nginx.sh ${session} ${req.ip}`
+        exec(cmd_nginx);
+
+        console.log(session_list)
+        console.log('----------------------------------------')
+        session_list
+            .filter(s => s.active === true)
+            .forEach(s => {
+                console.log(`num: ${s.num}, ip: ${s.user_ip}`)
+            })
+        console.log('----------------------------------------')
+        console.log(cmd)
+        console.log(cmd_nginx)
+        const now = new Date();
+        console.log(now.toLocaleString('ko-KR'));
+
+        res.send({ num: session, dead_line: false })
+    } else {
+        res.send({ num: false })
     }
 });
 
 
-app.get('/stop_xpra', (req, res) => {
-    const client = String(req.ip)
-    if (isSafeShellArg(client)) {
-        // 유저의 IP로 등록되어 실행중인 세션을 찾아 stop_xpra()
-        for (let i = 0; i < session_list.length; i++) {
-            if (session_list[i].user_ip === req.ip) {
-                stop_xpra(session_list[i].num)
-                break;
-            }
-        }
-
-        res.send(true)
+app.all('/stop_xpra', ...stopMiddlewares, (req, res) => {
+    if (!['GET', 'POST'].includes(req.method)) {
+        return res.status(405).send('method_not_allowed');
     }
+
+    const client = String(req.ip)
+    if (!isSafeShellArg(client)) {
+        return res.status(400).send(false);
+    }
+
+    // 유저의 IP로 등록되어 실행중인 세션을 찾아 stop_xpra()
+    for (let i = 0; i < session_list.length; i++) {
+        if (session_list[i].user_ip === req.ip) {
+            stop_xpra(session_list[i].num)
+            break;
+        }
+    }
+
+    res.send(true)
 });
 
 function stop_xpra(session) {
@@ -294,61 +420,75 @@ const ALLOWED_EXT = new Set([
     // 압축
     'zip', 'gz', 'bz2', 'rar', '7z', 'lzh', 'alz'
 ]);
-
-const SHARE_DIR = '/home/kweb/.var/app/com.usebottles.bottles/data/bottles/bottles';
-const max_volume = 500 * 1024 * 1024; // 500MB
-
-// 메모리 저장
-const storage = multer.memoryStorage();
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, TMP_UPLOAD_DIR);
+    },
+    filename: (req, file, cb) => {
+        const uniqueName = `upload-${Date.now()}-${Math.random().toString(36).slice(2)}`;
+        cb(null, uniqueName);
+    }
+});
 const upload = multer({
     storage,
+    limits: {
+        files: 20,
+        fileSize: 100 * 1024 * 1024,
+        parts: 30
+    },
     fileFilter: (req, file, cb) => {
         const ext = path.extname(file.originalname).toLowerCase().replace('.', '');
         if (!ALLOWED_EXT.has(ext)) {
-            return cb(new Error('허용되지 않은 파일 확장자'));
+            const error = new Error('허용되지 않은 파일 확장자');
+            error.code = 'INVALID_EXTENSION';
+            return cb(error);
         }
         cb(null, true);
     }
 });
 
 // 업로드 API (업로드 저장 후 .gz 복사본 생성)
-app.post('/upload', upload.array('files', 20), (req, res) => {
+app.post(
+    '/upload',
+    requireSameOrigin,
+    makeRateLimiter('upload', 20, 10 * 60 * 1000),
+    upload.array('files', 20),
+    (req, res) => {
+    const movedPaths = [];
     try {
-        let sessionObj = session_list.find(s => s.user_ip === req.ip);
+        let sessionObj = getSessionByIp(req.ip);
         if (!sessionObj) return res.status(400).send('Invalid session');
+        if (!req.files || req.files.length === 0) {
+            return res.status(400).send('upload error');
+        }
 
         let totalUpload = req.files.reduce((acc, file) => acc + file.size, 0);
 
         // 누적 용량 초과 체크
         if (sessionObj.upload_volume + totalUpload > max_volume) {
+            cleanupUploadedFiles(req.files);
             return res.send('max');
         }
 
-        // 저장 처리
-        req.files.forEach(file => {
-            // 세션 디렉토리
-            const dir = path.join(
-                SHARE_DIR,
-                `kweb-${sessionObj.num}`,
-                'drive_c/users/steamuser/Desktop'
-            );
-
-            // 파일 이름 충돌 처리
-            const ext = path.extname(file.originalname);
-            const base = path.basename(file.originalname, ext);
-
-            let filename = Buffer.from(file.originalname, 'latin1').toString('utf8');
-            let counter = 1;
-
-            while (fs.existsSync(path.join(dir, filename))) {
-                filename = `${base}(${counter})${ext}`;
-                counter++;
+        const dir = getDesktopDir(sessionObj.num);
+        fs.mkdirSync(dir, { recursive: true });
+        const preparedFiles = req.files.map(file => {
+            const filename = sanitizeFilename(file.originalname);
+            if (!filename) {
+                const error = new Error('허용되지 않은 파일 이름');
+                error.code = 'INVALID_FILENAME';
+                throw error;
             }
 
-            const destPath = path.join(dir, filename);
-
-            // 디스크에 원본 쓰기
-            fs.writeFileSync(destPath, file.buffer);
+            return {
+                tempPath: file.path,
+                destPath: getUniqueDestination(dir, filename)
+            };
+        });
+        // 저장 처리
+        preparedFiles.forEach(file => {
+            fs.renameSync(file.tempPath, file.destPath);
+            movedPaths.push(file.destPath);
         });
 
         // 누적 용량 증가
@@ -356,10 +496,16 @@ app.post('/upload', upload.array('files', 20), (req, res) => {
 
         res.send('ok');
     } catch (err) {
+        cleanupUploadedFiles(req.files);
+        cleanupMovedFiles(movedPaths);
         console.error(err);
+        if (err.code === 'INVALID_FILENAME') {
+            return res.status(400).send('upload error');
+        }
         res.status(500).send('upload error');
     }
-});
+    }
+);
 
 
 /* ===== 파일 트리 ===== */
@@ -384,24 +530,15 @@ function buildTree(dir, relative = "") {
     });
 }
 
-app.get("/show_tree", (req, res) => {
-    let session
-    for (let i = 0; i < session_list.length; i++) {
-        if (session_list[i].user_ip === req.ip) {
-            session = session_list[i].num
-            break;
-        }
-    }
+app.get("/show_tree", makeRateLimiter('show-tree', 60, 10 * 60 * 1000), (req, res) => {
+    const sessionObj = getSessionByIp(req.ip);
+    const session = sessionObj && sessionObj.num;
 
     if (!session || !/^[a-zA-Z0-9_-]+$/.test(session)) {
         return res.status(401).json({ error: 'Invalid session' });
     }
 
-    const dir = path.join(
-        SHARE_DIR,
-        `kweb-${session}`,
-        'drive_c/users/steamuser/'
-    );
+    const dir = getSessionRoot(session);
 
     const tree = buildTree(dir);
     const filtered_tree = tree.filter(item => item.id !== 'AppData' && item.id !== 'Temp')
@@ -411,40 +548,49 @@ app.get("/show_tree", (req, res) => {
 
 // 유틸: 안전하게 경로 검사
 function resolveSafe(relPath, session) {
-    // 금지: 절대경로, .. 등의 공격 시도 막기
     if (!relPath) return null;
-    // decodeURIComponent로 인코딩된 값이 넘어올 수 있음
+
     try { relPath = decodeURIComponent(relPath); } catch (e) { /* ignore */ }
+    if (relPath.includes('\0')) return null;
+    if (path.isAbsolute(relPath)) return null;
 
-    const dir = path.join(
-        SHARE_DIR,
-        `kweb-${session}`,
-        'drive_c/users/steamuser/'
-    );
+    const normalizedRelPath = path.normalize(relPath);
+    if (normalizedRelPath.startsWith('..') || normalizedRelPath.includes(`${path.sep}..${path.sep}`)) {
+        return null;
+    }
 
-    // 절대 경로로 변환
-    const fullPath = path.resolve(path.join(dir, relPath));
-    console.log(fullPath)
-    // 파일 존재 여부
-    if (!fs.existsSync(fullPath)) return null;
+    const rootPath = fs.realpathSync(getSessionRoot(session));
+    const candidatePath = path.resolve(rootPath, normalizedRelPath);
+    if (!(candidatePath === rootPath || candidatePath.startsWith(rootPath + path.sep))) {
+        return null;
+    }
+
+    if (!fs.existsSync(candidatePath)) return null;
+
+    let fullPath;
+    try {
+        fullPath = fs.realpathSync(candidatePath);
+    } catch (err) {
+        return null;
+    }
+
+    if (!(fullPath === rootPath || fullPath.startsWith(rootPath + path.sep))) {
+        return null;
+    }
+
     const stat = fs.statSync(fullPath);
     if (!stat.isFile()) return null;
-    // 확장자 체크
+
     const ext = path.extname(fullPath).slice(1).toLowerCase();
     if (!ALLOWED_EXT.has(ext)) return null;
     return { fullPath, stat };
 }
 
 
-app.get('/download', (req, res) => {
+app.get('/download', makeRateLimiter('download', 120, 10 * 60 * 1000), (req, res) => {
     const rel = req.query.file;
-    let session
-    for (let i = 0; i < session_list.length; i++) {
-        if (session_list[i].user_ip === req.ip) {
-            session = session_list[i].num
-            break;
-        }
-    }
+    const sessionObj = getSessionByIp(req.ip);
+    const session = sessionObj && sessionObj.num;
 
     if (!session || !/^[a-zA-Z0-9_-]+$/.test(session)) {
         return res.status(401).json({ error: 'Invalid session' });
@@ -490,6 +636,33 @@ app.get('/download', (req, res) => {
         });
         stream.pipe(res);
     }
+});
+
+app.use((err, req, res, next) => {
+    if (req.files) {
+        cleanupUploadedFiles(req.files);
+    }
+
+    if (err instanceof multer.MulterError) {
+        if (err.code === 'LIMIT_FILE_SIZE') {
+            return res.status(413).send('upload error');
+        }
+        if (err.code === 'LIMIT_FILE_COUNT' || err.code === 'LIMIT_PART_COUNT') {
+            return res.status(400).send('upload error');
+        }
+        return res.status(400).send('upload error');
+    }
+
+    if (err && err.code === 'INVALID_EXTENSION') {
+        return res.status(400).send('upload error');
+    }
+
+    if (err) {
+        console.error(err);
+        return res.status(500).send('server error');
+    }
+
+    next();
 });
 
 

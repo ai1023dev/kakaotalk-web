@@ -1,6 +1,8 @@
 # kakaotalk-web
 
-https://kakaotalk-web.siliod.com
+서비스 종료 되었습니다. (https://kakaotalk-web.siliod.com)
+
+AR 코딩 유튜브 : https://www.youtube.com/watch?v=fLHxaXIfits
 
 ## 프로젝트 소개
 

@@ -86,11 +86,6 @@ kweb-1~10 이름으로 카카오톡 미리 설치 + C 드라이브를 제외한 
 
 
 ## 라이선스
-Permission is granted to view this source code for educational purposes only.
+개인 사용, 열람 및 수정은 허용되나, 수정 여부와 관계없이 불특정 다수를 대상으로 한 모든 형태의 배포 및 재배포는 금지됩니다.
 
-You may NOT:
-- Use this code in production
-- Modify or distribute it
-- Use it commercially
-
-All rights reserved by the author.
+Personal use, inspection, and modification are permitted. However, regardless of whether the project has been modified, any form of distribution or redistribution to the general public is strictly prohibited.

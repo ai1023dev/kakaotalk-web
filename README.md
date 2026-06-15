@@ -86,6 +86,8 @@ kweb-1~10 이름으로 카카오톡 미리 설치 + C 드라이브를 제외한 
 
 
 ## 라이선스
-개인 사용, 열람 및 수정은 허용되나, 수정 여부와 관계없이 프로젝트 특성상 악용의 위험이 높아 불특정 다수를 대상으로 한 모든 형태의 배포 및 재배포는 금지됩니다.
+개인 사용, 열람 및 수정은 허용되나, 수정 여부와 관계없이 프로젝트 특성상 악용의 위험이 높아 불특정 다수를 대상으로 한 웹 형태의 배포 및 재배포는 금지됩니다.
 
-Personal use, inspection, and modification are permitted. However, regardless of whether the project has been modified, any form of distribution or redistribution to the general public is strictly prohibited.
+Personal use, inspection, and modification are permitted. However, due to the nature of this project and its high potential for misuse, distribution or redistribution in any publicly accessible web-based form to unspecified third parties is prohibited, regardless of whether the project has been modified.
+
+
